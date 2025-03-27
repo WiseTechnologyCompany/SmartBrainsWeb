@@ -29,7 +29,7 @@
 
 ## 🛠 Servidor de Desenvolvimento
 
-Para iniciar o servidor de desenvolvimento local, execute:
+Para iniciar o servidor de desenvolvimento local, use o seguinte comando::
 
 ```bash
 ng serve 
@@ -41,7 +41,7 @@ Uma vez que o servidor esteja em execução, abra o seu navegador e acesse `http
 <br> 
 
 
-Para iniciar o servidor e já abrir o navegador, execute:
+Para iniciar o servidor e já abrir o navegador, use o seguinte comando:
 
 ```bash
 ng serve --open
@@ -65,7 +65,7 @@ Isso irá compilar o seu projeto e armazenar os arquivos gerados no diretório `
 
 <br> 
 
-## 🔍 Executando os Testes Unitários
+## 🔍 Executando os Testes
 
 Para executar os testes unitários utilizando o [Karma](https://karma-runner.github.io), use o seguinte comando:
 
@@ -75,9 +75,8 @@ ng test
 
 <br> 
 
-## 🔍 Executando os Testes e2e
 
-Para executar os testes de ponta a ponta (e2e), execute:
+Para executar os testes de ponta a ponta (e2e), use o seguinte comando:
 
 ```bash
 ng e2e
