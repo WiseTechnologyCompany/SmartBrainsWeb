@@ -47,7 +47,7 @@ Para iniciar o servidor e já abrir o navegador, use o seguinte comando:
 ng serve --open
 ```
 
-A aplicação será recarregada automaticamente sempre que você modificar e salvar qualquer arquivo.
+Isso abrirá automaticamente uma nova guia no seu navegador na URL `http://localhost:4200/`. A aplicação será recarregada sempre que você modificar e salvar qualquer arquivo.
 
 
 <br> 
