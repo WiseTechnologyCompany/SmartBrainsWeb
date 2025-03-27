@@ -29,7 +29,7 @@
 
 ## 🛠 Servidor de Desenvolvimento
 
-Para iniciar o servidor de desenvolvimento local, use o seguinte comando::
+Para iniciar o servidor de desenvolvimento local, use o seguinte comando:
 
 ```bash
 ng serve 
