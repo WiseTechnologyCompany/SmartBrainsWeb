@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="criar-conta-container">
     <div class="logo-container">
-      <img class="logo-code-solutions" src="code-solutions-100.png" alt="Logo da Code Solutions"/>
+      <img class="logo-code-solutions" src="smartbrains.png" alt="Logo da Code Solutions"/>
     </div>
 
     <mat-stepper linear #stepper>
@@ -92,6 +92,7 @@
           </div>
 
           <div class="btn-container">
+            <button mat-fab matStepperNext [routerLink]="['/login']">CANCELAR</button>
             <button mat-fab matStepperNext (click)="verificarPrimeiroForms()">PRÓXIMO</button>
           </div>
         </form>

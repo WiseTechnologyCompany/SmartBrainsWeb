@@ -1,5 +1,5 @@
 $cor-fundo: #f8f9f9;
-$cor-primaria: #5c7cfa;
+$cor-primaria: #76A7B9;
 $cor-fundo-branco: #ffffff;
 $cor-texto-branco: #ffffff;
 $cor-sombra: rgba(0, 0, 0, 0.3);
@@ -23,7 +23,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
 .logo-container {
   top: 0;
   left: 0;
-  padding-left: 1rem;
+  padding-left: 1.8rem;
   padding-top: 1.5rem;
   padding-bottom: 0.5rem;
   background-color: transparent;
@@ -70,7 +70,9 @@ mat-form-field {
 
 .btn-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
+  gap: 84.5%;
+  width: 100%;
   padding-top: 8rem;
   padding-right: 0.3rem;
 }
