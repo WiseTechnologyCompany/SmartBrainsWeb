@@ -35,7 +35,7 @@ Para iniciar o servidor de desenvolvimento local, use o seguinte comando::
 ng serve 
 ```
 
-Uma vez que o servidor esteja em execução, abra o seu navegador e acesse `http://localhost:4200/`. A aplicação será recarregada automaticamente sempre que você modificar qualquer arquivo.
+Uma vez que o servidor esteja em execução, abra o seu navegador e acesse `http://localhost:4200/`. A aplicação será recarregada automaticamente sempre que você modificar e salvar qualquer arquivo.
 
 
 <br> 
@@ -47,7 +47,7 @@ Para iniciar o servidor e já abrir o navegador, use o seguinte comando:
 ng serve --open
 ```
 
-A aplicação será recarregada automaticamente sempre que você modificar qualquer arquivo.
+A aplicação será recarregada automaticamente sempre que você modificar e salvar qualquer arquivo.
 
 
 <br> 
