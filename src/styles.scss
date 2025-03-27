@@ -7,6 +7,21 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.leFadeInLeft {
+  animation: leFadeInLeft 1s ease-out forwards;
+}
+
+@keyframes leFadeInLeft {
+  from {
+      opacity: 0;
+      transform: translateX(-90px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
 html, body { height: 100%; }
 html, body { height: 100%; }
 body { margin: 0;  font-family: "Montserrat", sans-serif; }
