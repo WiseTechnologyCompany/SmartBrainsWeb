@@ -1,0 +1,61 @@
+<div class="main-container">
+  <div class="login-container">
+    <div class="logo-container">
+      <img
+        class="logo-code-solutions"
+        src="smartbrains.png"
+        alt="Logo da Code Solutions"/>
+    </div>
+
+    <div class="email-container">
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input
+          matInput
+          placeholder="E-mail"
+          [formControl]="email"
+          (blur)="emailErrorMessage()"
+          required/>
+        <mat-error ngIf="email.invalid">{{ emailError() }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="senha-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input
+          matInput
+          placeholder="Senha"
+          [formControl]="senha"
+          (blur)="senhaErrorMessage()"
+          [type]="hide() ? 'password' : 'text'"
+          required/>
+        <mat-error ngIf="senha.invalid">{{ senhaError() }}</mat-error>
+
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()">
+          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+
+        <mat-hint align="end">
+          <a [routerLink]="['/esqueceu-senha']">Esqueceu a senha?</a>
+        </mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="btn-container">
+      <button class="btn-confirmar" mat-fab>CONFIRMAR</button>
+    </div>
+
+    <div class="criar-conta-container">
+      <a [routerLink]="['/criar-conta']">Não tem uma conta? Crie uma agora!</a>
+    </div>
+
+  </div>
+</div>

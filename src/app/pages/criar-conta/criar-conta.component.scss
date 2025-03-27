@@ -1,0 +1,142 @@
+$cor-fundo: #f8f9f9;
+$cor-primaria: #5c7cfa;
+$cor-fundo-branco: #ffffff;
+$cor-texto-branco: #ffffff;
+$cor-sombra: rgba(0, 0, 0, 0.3);
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: $cor-fundo;
+}
+
+.criar-conta-container {
+  width: 100rem;
+  height: 50rem;
+  border-radius: 1rem;
+  background-color: $cor-fundo-branco;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.logo-container {
+  top: 0;
+  left: 0;
+  padding-left: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  background-color: transparent;
+}
+
+.logo-code-solutions {
+  width: 5.5%;
+  background-color: transparent;
+}
+
+mat-stepper {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  background-color: transparent;
+}
+
+.primeiro-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4rem;
+  width: 99.6%;
+}
+
+.segundo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 3rem;
+  width: 99.6%;
+}
+
+.terceiro-container {
+  display: flex;
+  align-items: center;
+  padding-top: 3rem;
+  gap: 4.8rem;
+  width: 99.6%;
+}
+
+mat-form-field {
+  width: 30%;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8rem;
+  padding-right: 0.3rem;
+}
+
+.btn-container button {
+  color: $cor-texto-branco;
+  background-color: $cor-primaria;
+  font-weight: 500;
+  font-size: 15px;
+  width: 7rem;
+}
+
+.btn-container button:hover {
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.btn-container-endereco {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 84.5%;
+  width: 100%;
+  padding-top: 8rem;
+  padding-right: 0.3rem;
+}
+
+.btn-container-endereco button {
+  color: $cor-texto-branco;
+  background-color: $cor-primaria;
+  font-weight: 500;
+  font-size: 15px;
+  width: 7rem;
+}
+
+.email-container,
+.senha-container,
+.confirmar-senha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.btn-finalizar-container {
+  display: flex;
+  padding-top: 3%;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.btn-finalizar {
+  font-size: 21px;
+  width: 30%;
+  font-weight: 600;
+  background-color: $cor-primaria;
+  color: $cor-texto-branco !important;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.btn-voltar-container {
+  padding-top: 3%;
+}
+
+.btn-voltar-container button {
+  color: $cor-texto-branco;
+  background-color: $cor-primaria;
+  font-weight: 500;
+  font-size: 15px;
+  width: 7rem;
+}

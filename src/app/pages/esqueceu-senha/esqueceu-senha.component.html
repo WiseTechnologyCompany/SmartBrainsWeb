@@ -1,0 +1,38 @@
+<div class="main-container">
+  <div class="esqueceu-senha-container">
+    <div class="logo-container">
+      <img
+        class="logo-code-solutions"
+        src="code-solutions-100.png"
+        alt="Logo da Code Solutions"/>
+    </div>
+
+    <div class="texto">
+      <p>Confirmar Identidade</p>
+    </div>
+
+    <div class="subtitulo">
+      <p>Informe seu e-mail para receber o código de confirmação</p>
+    </div>
+
+    <div class="email-container">
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input
+          matInput
+          placeholder="E-mail"
+          [formControl]="email"
+          (blur)="emailErrorMessage()"
+          required/>
+        <mat-error ngIf="email.invalid">{{ emailError() }}</mat-error>
+        <mat-icon matPrefix>email</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="btn-container">
+      <button [routerLink]="['/login']" class="btn-cancelar" mat-fab>CANCELAR</button>
+      <button class="btn-confirmar" mat-fab>ENVIAR</button>
+    </div>
+
+  </div>
+</div>

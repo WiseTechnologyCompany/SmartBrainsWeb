@@ -1,0 +1,239 @@
+<div class="main-container">
+  <div class="criar-conta-container">
+    <div class="logo-container">
+      <img class="logo-code-solutions" src="code-solutions-100.png" alt="Logo da Code Solutions"/>
+    </div>
+
+    <mat-stepper linear #stepper>
+      <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Dados Pessoais</ng-template>
+
+          <div class="primeiro-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="nome" />
+              <mat-error *ngIf="firstFormGroup.get('nome')?.hasError('required')">
+                Nome é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Sobrenome</mat-label>
+              <input matInput formControlName="sobrenome"/>
+              <mat-error *ngIf="firstFormGroup.get('sobrenome')?.hasError('required')">
+                Sobrenome é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Data de Nascimento</mat-label>
+              <input matInput formControlName="dataNascimento" mask="00/00/0000"/>
+              <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-icon matIconSuffix>calendar_month</mat-icon>
+              <mat-error *ngIf="firstFormGroup.get('dataNascimento')?.hasError('required')">
+                Data de Nascimento é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="segundo-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Gênero</mat-label>
+              <mat-select formControlName="genero">
+                <mat-option value="feminino">Feminino</mat-option>
+                <mat-option value="masculino">Masculino</mat-option>
+                <mat-option value="masculino">Prefiro não dizer</mat-option>
+              </mat-select>
+              <mat-error *ngIf="firstFormGroup.get('genero')?.hasError('required')">
+                Selecione um Gênero!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Estado Civil</mat-label>
+              <mat-select formControlName="estadoCivil">
+                <mat-option value="solteiro">Solteiro</mat-option>
+                <mat-option value="uniaoEstavel">União Estável</mat-option>
+                <mat-option value="casado">Casado</mat-option>
+                <mat-option value="divorciado">Divorciado</mat-option>
+                <mat-option value="viuvo">Viúvo</mat-option>
+              </mat-select>
+              <mat-error *ngIf="firstFormGroup.get('estadoCivil')?.hasError('required')">
+                Selecione um Estado Civil!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Telefone</mat-label>
+              <input matInput formControlName="telefone" mask="(00) 00000-0000" />
+              <mat-error *ngIf="firstFormGroup.get('telefone')?.hasError('required')">
+                Telefone é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="terceiro-container">
+            <mat-form-field appearance="outline">
+              <mat-label>CPF</mat-label>
+              <input matInput formControlName="cpf" mask="000.000.000-00" />
+              <mat-error *ngIf="firstFormGroup.get('cpf')?.hasError('required')">
+                CPF é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>RG</mat-label>
+              <input matInput formControlName="rg" mask="000.000.000-0" />
+              <mat-error *ngIf="firstFormGroup.get('rg')?.hasError('required')">
+                RG é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="btn-container">
+            <button mat-fab matStepperNext (click)="verificarPrimeiroForms()">PRÓXIMO</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Endereço</ng-template>
+
+          <div class="primeiro-container">
+            <mat-form-field>
+              <mat-label>Rua</mat-label>
+              <mat-icon matSuffix>house</mat-icon>
+              <input matInput formControlName="rua" />
+              <mat-error *ngIf="secondFormGroup.get('rua')?.hasError('required')">
+                Rua é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Número</mat-label>
+            <mat-icon matSuffix>123</mat-icon>
+            <input matInput formControlName="numero" />
+            <mat-error *ngIf="secondFormGroup.get('numero')?.hasError('required')">
+              Número é obrigatório!
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Bairro</mat-label>
+            <input matInput formControlName="bairro" />
+            <mat-error *ngIf="secondFormGroup.get('bairro')?.hasError('required')">
+              Bairro é obrigatório!
+            </mat-error>
+          </mat-form-field>
+          </div>
+
+          <div class="segundo-container">
+            <mat-form-field>
+              <mat-label>Cidade</mat-label>
+              <mat-icon matSuffix>matLocationOn</mat-icon>
+              <input matInput formControlName="cidade" />
+              <mat-error *ngIf="secondFormGroup.get('cidade')?.hasError('required')">
+                Cidade é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Estado</mat-label>
+              <mat-icon matSuffix>mapoutline</mat-icon>
+              <input matInput formControlName="estado" maxlength="2" />
+              <mat-error *ngIf="secondFormGroup.get('estado')?.hasError('required')">
+                Estado é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>CEP</mat-label>
+              <input matInput formControlName="cep" mask="00000-000"/>
+              <mat-error *ngIf="secondFormGroup.get('cep')?.hasError('required')">
+                CEP é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="terceiro-container">
+            <mat-form-field>
+              <mat-label>Complemento</mat-label>
+              <input matInput formControlName="complemento" />
+              <mat-error *ngIf="secondFormGroup.get('complemento')?.hasError('required')">
+                Complemento é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Ponto de Referência</mat-label>
+              <input matInput formControlName="pontoReferencia" />
+              <mat-error *ngIf="secondFormGroup.get('pontoReferencia')?.hasError('required')">
+                Ponto de Referência é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="btn-container-endereco">
+            <button mat-fab matStepperPrevious>VOLTAR</button>
+            <button mat-fab matStepperNext (click)="verificarSegundoForms()">PRÓXIMO</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+        <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Login</ng-template>
+
+          <div class="email-container">
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <mat-icon matPrefix>email</mat-icon>
+              <input matInput formControlName="email"/>
+              <mat-error *ngIf="thirdFormGroup.get('email')?.hasError('required')">
+                E-mail é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="senha-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Senha</mat-label>
+              <mat-icon matPrefix>lock</mat-icon>
+              <input matInput [type]="hide() ? 'password' : 'text'" formControlName="senha" />
+              <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+                <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+              </button>
+              <mat-error *ngIf="thirdFormGroup.get('senha')?.hasError('required')">
+                Senha é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="confirmar-senha-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Confirmar Senha</mat-label>
+              <mat-icon matPrefix>lock</mat-icon>
+              <input matInput [type]="hide() ? 'password' : 'text'" formControlName="confirmarSenha" />
+              <button mat-icon-button matSuffix  (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+                <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+              </button>
+              <mat-error *ngIf="thirdFormGroup.get('confirmarSenha')?.hasError('required')">
+                Confirmar Senha é obrigatório!
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        <div class="btn-finalizar-container">
+          <button class="btn-finalizar" mat-fab (click)="verificarTerceiroForms()">FINALIZAR</button>
+        </div>
+
+        <div class="btn-voltar-container">
+          <button class="btn-voltar" mat-fab matStepperPrevious>VOLTAR</button>
+        </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+$cor-fundo: #f8f9f9;
+$cor-primaria: #84B5CB;
+$cor-fundo-branco: #ffffff;
+$cor-texto-branco: #ffffff;
+$cor-sombra: rgba(0, 0, 0, 0.3);
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: $cor-fundo;
+}
+
+.login-container {
+  width: 67rem;
+  height: 42rem;
+  border-radius: 1rem;
+  background-color: $cor-fundo-branco;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.logo-container {
+  display: flex;
+  padding-top: 5%;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.logo-code-solutions {
+  width: 14%;
+  background-color: transparent;
+}
+
+.email-container, mat-form-field {
+  width: 100%;
+  display: flex;
+  padding-top: 2%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.senha-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
+mat-form-field button {
+  margin-left: -18%;
+}
+
+mat-hint {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  padding-top: 5px;
+  margin-right: -3.5%;
+}
+
+mat-hint a {
+  text-decoration: none;
+  color: $cor-primaria;
+  cursor: pointer;
+}
+
+mat-hint a:hover {
+  text-decoration: underline;
+}
+
+.btn-container {
+  display: flex;
+  padding-top: 3%;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.btn-confirmar {
+  font-size: 21px;
+  width: 50%;
+  font-weight: 600;
+  background-color: $cor-primaria;
+  color: $cor-texto-branco !important;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.criar-conta-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 12%;
+}
+
+.criar-conta-container a {
+  text-decoration: none;
+  color: $cor-primaria;
+  cursor: pointer;
+}
+
+.criar-conta-container a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,113 @@
+$cor-fundo: #f8f9f9;
+$cor-primaria: #5c7cfa;
+$cor-texto-preto: #000000;
+$cor-fundo-branco: #ffffff;
+$cor-texto-branco: #ffffff;
+$cor-sombra: rgba(0, 0, 0, 0.3);
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: $cor-fundo;
+}
+
+.esqueceu-senha-container {
+  width: 67rem;
+  height: 42rem;
+  border-radius: 1rem;
+  background-color: $cor-fundo-branco;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.logo-container {
+  display: flex;
+  padding-top: 5%;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.logo-code-solutions {
+  width: 14%;
+  background-color: transparent;
+}
+
+.texto {
+  display: flex;
+  padding-top: 2%;
+  justify-content: center;
+  background-color: transparent;
+  font-size: 28px;
+  color: $cor-texto-preto;
+}
+
+.subtitulo {
+  display: flex;
+  padding-top: 2%;
+  justify-content: center;
+  background-color: transparent;
+  font-size: 18px;
+  color: $cor-texto-preto;
+}
+
+.email-container, mat-form-field {
+  width: 100%;
+  display: flex;
+  padding-top: 2%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
+mat-form-field button {
+  margin-left: -18%;
+}
+
+mat-hint {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  padding-top: 5px;
+  margin-right: -3.5%;
+}
+
+mat-hint a {
+  text-decoration: none;
+  color: $cor-primaria;
+  cursor: pointer;
+}
+
+mat-hint a:hover {
+  text-decoration: underline;
+}
+
+.btn-container {
+  display: flex;
+  padding-top: 3%;
+  gap: 14%;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.btn-cancelar {
+  font-size: 21px;
+  width: 18%;
+  font-weight: 600;
+  background-color: $cor-primaria;
+  color: $cor-texto-branco !important;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.btn-confirmar {
+  font-size: 21px;
+  width: 18%;
+  font-weight: 600;
+  background-color: $cor-primaria;
+  color: $cor-texto-branco !important;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
