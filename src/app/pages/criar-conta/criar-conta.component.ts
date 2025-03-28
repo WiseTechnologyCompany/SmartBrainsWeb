@@ -44,7 +44,7 @@ export class CriarContaComponent {
   formGroupDadosPessoais: FormGroup;
   formGroupLogin: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private readonly _formBuilder: FormBuilder) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.emailErrorMessage());
