@@ -35,12 +35,11 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup } 
 export class CriarContaComponent {
 
     isEditable = true;
-    firstFormGroup: FormGroup;
-    secondFormGroup: FormGroup;
-    thirdFormGroup: FormGroup;
+    formGroupDadosPessoais: FormGroup;
+    formGroupLogin: FormGroup;
 
     constructor(private _formBuilder: FormBuilder) {
-      this.firstFormGroup = this._formBuilder.group({
+      this.formGroupDadosPessoais = this._formBuilder.group({
         nome: ['', Validators.required],
         sobrenome: ['', Validators.required],
         dataNascimento: ['', Validators.required],
@@ -48,21 +47,10 @@ export class CriarContaComponent {
         estadoCivil: ['', Validators.required],
         telefone: ['', Validators.required],
         cpf: ['', Validators.required],
-        rg: ['', Validators.required],
+        email: ['', Validators.required],
       });
 
-      this.secondFormGroup = this._formBuilder.group({
-        rua: ['', Validators.required],
-        numero: ['', Validators.required],
-        bairro: ['', Validators.required],
-        cidade: ['', Validators.required],
-        estado: ['', Validators.required],
-        cep: ['', Validators.required],
-        complemento: ['', Validators.required],
-        pontoReferencia: ['', Validators.required],
-      });
-
-      this.thirdFormGroup = this._formBuilder.group({
+      this.formGroupLogin = this._formBuilder.group({
         email: ['', Validators.required],
         senha: ['', Validators.required],
         confirmarSenha: ['', Validators.required],
@@ -75,15 +63,11 @@ export class CriarContaComponent {
     event.stopPropagation();
   }
 
-  verificarPrimeiroForms() {
-    this.firstFormGroup.markAllAsTouched();
+  verificarFormGroupDadosPessoais() {
+    this.formGroupDadosPessoais.markAllAsTouched();
   }
 
-  verificarSegundoForms() {
-    this.secondFormGroup.markAllAsTouched();
-  }
-
-  verificarTerceiroForms() {
-    this.thirdFormGroup.markAllAsTouched();
+  verificarFormGroupLogin() {
+    this.formGroupLogin.markAllAsTouched();
   }
 }
