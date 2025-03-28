@@ -2,9 +2,9 @@
   <div class="esqueceu-senha-container">
     <div class="logo-container">
       <img
-        class="logo-code-solutions"
-        src="smartbrains.png"
-        alt="Logo da Code Solutions"/>
+        class="logo-wisefinances"
+        src="wisefinances.png"
+        alt="Logo da Wise Finances" />
     </div>
 
     <div class="titulo">
@@ -23,16 +23,23 @@
           placeholder="E-mail"
           [formControl]="email"
           (blur)="emailErrorMessage()"
-          required/>
+          required />
         <mat-error ngIf="email.invalid">{{ emailError() }}</mat-error>
         <mat-icon matPrefix>email</mat-icon>
       </mat-form-field>
     </div>
 
     <div class="btn-container">
-      <button [routerLink]="['/login']" class="btn-cancelar" mat-fab>CANCELAR</button>
-      <button class="btn-confirmar" mat-fab>ENVIAR</button>
+      <button [routerLink]="['/login']" class="btn-cancelar" mat-fab>
+        CANCELAR
+      </button>
+      <button class="btn-enviar" mat-fab>ENVIAR</button>
     </div>
+  </div>
 
+  <div class="footer-container">
+    <footer>
+      <p>© 2025 Wise Finances</p>
+    </footer>
   </div>
 </div>

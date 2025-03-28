@@ -29,7 +29,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   background-color: transparent;
 }
 
-.logo-code-solutions {
+.logo-wisefinances {
   width: 5.5%;
   background-color: transparent;
 }
@@ -89,23 +89,6 @@ mat-form-field {
   box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
 }
 
-.btn-container-endereco {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 84.5%;
-  width: 100%;
-  padding-top: 8rem;
-  padding-right: 0.3rem;
-}
-
-.btn-container-endereco button {
-  color: $cor-texto-branco;
-  background-color: $cor-primaria;
-  font-weight: 500;
-  font-size: 15px;
-  width: 7rem;
-}
-
 .email-container,
 .senha-container,
 .confirmar-senha-container {
@@ -148,4 +131,20 @@ mat-form-field {
 
 .btn-voltar-container button:hover {
   box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.foot-container {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: $cor-primaria;
+  background-color: $cor-fundo;
+  padding-bottom: 0.5%;
 }

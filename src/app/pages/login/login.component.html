@@ -2,9 +2,9 @@
   <div class="login-container">
     <div class="logo-container">
       <img
-        class="logo-code-solutions"
-        src="smartbrains.png"
-        alt="Logo da Code Solutions"/>
+        class="logo-wisefinances"
+        src="wisefinances.png"
+        alt="Logo da Wise Finances" />
     </div>
 
     <div class="email-container">
@@ -16,8 +16,8 @@
           placeholder="E-mail"
           [formControl]="email"
           (blur)="emailErrorMessage()"
-          required/>
-        <mat-error ngIf="email.invalid">{{ emailError() }}</mat-error>
+          required />
+        <mat-error *ngIf="email.invalid">{{ emailError() }}</mat-error>
       </mat-form-field>
     </div>
 
@@ -31,8 +31,8 @@
           [formControl]="senha"
           (blur)="senhaErrorMessage()"
           [type]="hide() ? 'password' : 'text'"
-          required/>
-        <mat-error ngIf="senha.invalid">{{ senhaError() }}</mat-error>
+          required />
+        <mat-error *ngIf="senha.invalid">{{ senhaError() }}</mat-error>
 
         <button
           mat-icon-button
@@ -56,6 +56,11 @@
     <div class="criar-conta-container">
       <a [routerLink]="['/criar-conta']">Não tem uma conta? Crie uma agora!</a>
     </div>
+  </div>
 
+  <div class="footer-container">
+    <footer>
+      <p>© 2025 Wise Finances</p>
+    </footer>
   </div>
 </div>

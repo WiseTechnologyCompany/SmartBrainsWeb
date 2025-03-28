@@ -27,7 +27,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   background-color: transparent;
 }
 
-.logo-code-solutions {
+.logo-wisefinances {
   width: 14%;
   background-color: transparent;
 }
@@ -108,4 +108,15 @@ mat-hint a:hover {
 
 .criar-conta-container a:hover {
   text-decoration: underline;
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: $cor-primaria;
+  background-color: $cor-fundo;
+  padding-bottom: 0.5%;
 }

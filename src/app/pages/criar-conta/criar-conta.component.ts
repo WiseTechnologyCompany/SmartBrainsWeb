@@ -37,9 +37,9 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, F
 export class CriarContaComponent {
   readonly email = new FormControl('', [Validators.required, Validators.email]);
 
-  emailError = signal('');
-  hide = signal(true);
   isEditable = true;
+  hide = signal(true);
+  emailError = signal('');
 
   formGroupDadosPessoais: FormGroup;
   formGroupLogin: FormGroup;

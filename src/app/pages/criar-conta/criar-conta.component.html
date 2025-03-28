@@ -1,7 +1,10 @@
 <div class="cssanimation leFadeInLeft sequence main-container">
   <div class="criar-conta-container">
     <div class="logo-container">
-      <img class="logo-code-solutions" src="smartbrains.png" alt="Logo da Code Solutions"/>
+      <img
+        class="logo-wisefinances"
+        src="wisefinances.png"
+        alt="Logo da Wise Finances" />
     </div>
 
     <mat-stepper linear #stepper>
@@ -13,25 +16,28 @@
             <mat-form-field appearance="outline">
               <mat-label>Nome</mat-label>
               <input matInput formControlName="nome" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('nome')?.hasError('required')">
+              <mat-error *ngIf="formGroupDadosPessoais.get('nome')?.hasError('required')" >
                 Nome é obrigatório!
               </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>Sobrenome</mat-label>
-              <input matInput formControlName="sobrenome"/>
-              <mat-error *ngIf="formGroupDadosPessoais.get('sobrenome')?.hasError('required')">
-                Sobrenome é obrigatório!
+              <input matInput formControlName="sobrenome" />
+              <mat-error *ngIf="formGroupDadosPessoais.get('sobrenome')?.hasError('required')" >
+              Sobrenome é obrigatório!
               </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>Data de Nascimento</mat-label>
-              <input matInput formControlName="dataNascimento" mask="00/00/0000"/>
+              <input
+                matInput
+                formControlName="dataNascimento"
+                mask="00/00/0000" />
               <mat-hint>DD/MM/YYYY</mat-hint>
               <mat-icon matPrefix>calendar_month</mat-icon>
-              <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')">
+              <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')" >
                 Data de Nascimento é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -46,23 +52,26 @@
                 placeholder="E-mail"
                 [formControl]="email"
                 (blur)="emailErrorMessage()"
-                required/>
+                required />
               <mat-error *ngIf="email.invalid">{{ emailError() }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>CPF</mat-label>
               <input matInput formControlName="cpf" mask="000.000.000-00" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('required')">
+              <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('required')" >
                 CPF é obrigatório!
               </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>Telefone</mat-label>
-              <input matInput formControlName="telefone" mask="(00) 00000-0000" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('telefone')?.hasError('required')">
-                Telefone é obrigatório!
+              <input
+                matInput
+                formControlName="telefone"
+                mask="(00) 00000-0000" />
+              <mat-error *ngIf="formGroupDadosPessoais.get('telefone')?.hasError('required')" >
+                  Telefone é obrigatório!
               </mat-error>
             </mat-form-field>
           </div>
@@ -71,7 +80,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Profissão</mat-label>
               <input matInput formControlName="profissao" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('profissao')?.hasError('required')">
+              <mat-error *ngIf="formGroupDadosPessoais.get('profissao')?.hasError('required')" >
                 Profissão é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -79,7 +88,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Empresa</mat-label>
               <input matInput formControlName="empresa" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('empresa')?.hasError('required')">
+              <mat-error *ngIf="formGroupDadosPessoais.get('empresa')?.hasError('required')" >
                 Empresa é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -93,29 +102,36 @@
                 <mat-option value="divorciado">Divorciado</mat-option>
                 <mat-option value="viuvo">Viúvo</mat-option>
               </mat-select>
-              <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')">
+              <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')" >
                 Selecione um Estado Civil!
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="btn-container">
-            <button mat-fab matStepperNext [routerLink]="['/login']">CANCELAR</button>
-            <button mat-fab matStepperNext (click)="verificarFormGroupDadosPessoais()">PRÓXIMO</button>
+            <button mat-fab matStepperNext [routerLink]="['/login']">
+              CANCELAR
+            </button>
+            <button
+              mat-fab
+              matStepperNext
+              (click)="verificarFormGroupDadosPessoais()" >
+              PRÓXIMO
+            </button>
           </div>
         </form>
       </mat-step>
 
       <mat-step [stepControl]="formGroupLogin" [editable]="isEditable">
         <form [formGroup]="formGroupLogin">
-        <ng-template matStepLabel>Login</ng-template>
+          <ng-template matStepLabel>Login</ng-template>
 
           <div class="email-container">
             <mat-form-field appearance="outline">
               <mat-label>E-mail</mat-label>
               <mat-icon matPrefix>email</mat-icon>
-              <input matInput formControlName="email"/>
-              <mat-error *ngIf="formGroupLogin.get('email')?.hasError('required')">
+              <input matInput formControlName="email" />
+              <mat-error *ngIf="formGroupLogin.get('email')?.hasError('required')" >
                 E-mail é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -125,11 +141,20 @@
             <mat-form-field appearance="outline">
               <mat-label>Senha</mat-label>
               <mat-icon matPrefix>lock</mat-icon>
-              <input matInput [type]="hide() ? 'password' : 'text'" formControlName="senha" />
-              <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
-                <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+              <input
+                matInput
+                [type]="hide() ? 'password' : 'text'"
+                formControlName="senha" />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="clickEvent($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()" >
+                <mat-icon>
+                  {{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
               </button>
-              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('required')">
+              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('required')" >
                 Senha é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -139,25 +164,48 @@
             <mat-form-field appearance="outline">
               <mat-label>Confirmar Senha</mat-label>
               <mat-icon matPrefix>lock</mat-icon>
-              <input matInput [type]="hide() ? 'password' : 'text'" formControlName="confirmarSenha" />
-              <button mat-icon-button matSuffix  (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
-                <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+              <input
+                matInput
+                [type]="hide() ? 'password' : 'text'"
+                formControlName="confirmarSenha" />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="clickEvent($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()" >
+                <mat-icon>
+                  {{ hide() ? "visibility_off" : "visibility" }}
+                  </mat-icon>
               </button>
-              <mat-error *ngIf="formGroupLogin.get('confirmarSenha')?.hasError('required')">
+              <mat-error *ngIf=" formGroupLogin.get('confirmarSenha')?.hasError('required')" >
                 Confirmar Senha é obrigatório!
               </mat-error>
             </mat-form-field>
           </div>
 
-        <div class="btn-finalizar-container">
-          <button class="btn-finalizar" mat-fab (click)="verificarFormGroupLogin()">FINALIZAR</button>
-        </div>
+          <div class="btn-finalizar-container">
+            <button
+              class="btn-finalizar"
+              mat-fab
+              (click)="verificarFormGroupLogin()" >
+              FINALIZAR
+            </button>
+          </div>
 
-        <div class="btn-voltar-container">
-          <button class="btn-voltar" mat-fab matStepperPrevious>VOLTAR</button>
-        </div>
+          <div class="btn-voltar-container">
+            <button class="btn-voltar" mat-fab matStepperPrevious>
+              VOLTAR
+            </button>
+          </div>
         </form>
       </mat-step>
     </mat-stepper>
+  </div>
+
+  <div class="footer-container">
+    <footer>
+      <p>© 2025 Wise Finances</p>
+    </footer>
   </div>
 </div>

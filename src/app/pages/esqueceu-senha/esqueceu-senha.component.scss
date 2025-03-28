@@ -28,17 +28,17 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   background-color: transparent;
 }
 
-.logo-code-solutions {
+.logo-wisefinances {
   width: 15%;
   background-color: transparent;
 }
 
 .titulo {
   display: flex;
-  padding-top: 4.5% !important;
+  padding-top: 4.2% !important;
   justify-content: center;
   background-color: transparent;
-  font-size: 30px;
+  font-size: 185%;
   color: $cor-texto-preto;
   font-weight: 400;
 }
@@ -48,7 +48,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   padding-top: 2%;
   justify-content: center;
   background-color: transparent;
-  font-size: 18px;
+  font-size: 110%;
   color: $cor-texto-preto;
   font-weight: 400;
 }
@@ -70,24 +70,6 @@ mat-form-field button {
   margin-left: -18%;
 }
 
-mat-hint {
-  display: flex;
-  font-size: 14px;
-  font-weight: 500;
-  padding-top: 5px;
-  margin-right: -3.5%;
-}
-
-mat-hint a {
-  text-decoration: none;
-  color: $cor-primaria;
-  cursor: pointer;
-}
-
-mat-hint a:hover {
-  text-decoration: underline;
-}
-
 .btn-container {
   display: flex;
   padding-top: 3%;
@@ -104,7 +86,7 @@ mat-hint a:hover {
   color: $cor-texto-branco !important;
 }
 
-.btn-confirmar {
+.btn-enviar {
   font-size: 21px;
   width: 18%;
   font-weight: 600;
@@ -116,6 +98,17 @@ mat-hint a:hover {
   box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
 }
 
-.btn-confirmar:hover {
+.btn-enviar:hover {
   box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: $cor-primaria;
+  background-color: $cor-fundo;
+  padding-bottom: 0.5%;
 }
