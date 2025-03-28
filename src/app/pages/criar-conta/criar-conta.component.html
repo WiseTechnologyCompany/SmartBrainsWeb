@@ -30,7 +30,7 @@
               <mat-label>Data de Nascimento</mat-label>
               <input matInput formControlName="dataNascimento" mask="00/00/0000"/>
               <mat-hint>DD/MM/YYYY</mat-hint>
-              <mat-icon matIconSuffix>calendar_month</mat-icon>
+              <mat-icon matPrefix>calendar_month</mat-icon>
               <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')">
                 Data de Nascimento é obrigatório!
               </mat-error>
@@ -39,28 +39,22 @@
 
           <div class="segundo-container">
             <mat-form-field appearance="outline">
-              <mat-label>Gênero</mat-label>
-              <mat-select formControlName="genero">
-                <mat-option value="feminino">Feminino</mat-option>
-                <mat-option value="masculino">Masculino</mat-option>
-                <mat-option value="masculino">Prefiro não dizer</mat-option>
-              </mat-select>
-              <mat-error *ngIf="formGroupDadosPessoais.get('genero')?.hasError('required')">
-                Selecione um Gênero!
-              </mat-error>
+              <mat-label>E-mail</mat-label>
+              <mat-icon matPrefix>email</mat-icon>
+              <input
+                matInput
+                placeholder="E-mail"
+                [formControl]="email"
+                (blur)="emailErrorMessage()"
+                required/>
+              <mat-error *ngIf="email.invalid">{{ emailError() }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Estado Civil</mat-label>
-              <mat-select formControlName="estadoCivil">
-                <mat-option value="solteiro">Solteiro</mat-option>
-                <mat-option value="uniaoEstavel">União Estável</mat-option>
-                <mat-option value="casado">Casado</mat-option>
-                <mat-option value="divorciado">Divorciado</mat-option>
-                <mat-option value="viuvo">Viúvo</mat-option>
-              </mat-select>
-              <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')">
-                Selecione um Estado Civil!
+              <mat-label>CPF</mat-label>
+              <input matInput formControlName="cpf" mask="000.000.000-00" />
+              <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('required')">
+                CPF é obrigatório!
               </mat-error>
             </mat-form-field>
 
@@ -75,18 +69,32 @@
 
           <div class="terceiro-container">
             <mat-form-field appearance="outline">
-              <mat-label>CPF</mat-label>
-              <input matInput formControlName="cpf" mask="000.000.000-00" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('required')">
-                CPF é obrigatório!
+              <mat-label>Profissão</mat-label>
+              <input matInput formControlName="profissao" />
+              <mat-error *ngIf="formGroupDadosPessoais.get('profissao')?.hasError('required')">
+                Profissão é obrigatório!
               </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>RG</mat-label>
-              <input matInput formControlName="rg" mask="000.000.000-0" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('rg')?.hasError('required')">
-                RG é obrigatório!
+              <mat-label>Empresa</mat-label>
+              <input matInput formControlName="empresa" />
+              <mat-error *ngIf="formGroupDadosPessoais.get('empresa')?.hasError('required')">
+                Empresa é obrigatório!
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Estado Civil</mat-label>
+              <mat-select formControlName="estadoCivil">
+                <mat-option value="solteiro">Solteiro</mat-option>
+                <mat-option value="uniaoEstavel">União Estável</mat-option>
+                <mat-option value="casado">Casado</mat-option>
+                <mat-option value="divorciado">Divorciado</mat-option>
+                <mat-option value="viuvo">Viúvo</mat-option>
+              </mat-select>
+              <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')">
+                Selecione um Estado Civil!
               </mat-error>
             </mat-form-field>
           </div>

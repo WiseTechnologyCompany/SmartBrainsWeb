@@ -128,6 +128,9 @@ mat-form-field {
   font-weight: 600;
   background-color: $cor-primaria;
   color: $cor-texto-branco !important;
+}
+
+.btn-finalizar:hover {
   box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
 }
 
@@ -141,4 +144,8 @@ mat-form-field {
   font-weight: 500;
   font-size: 15px;
   width: 7rem;
+}
+
+.btn-voltar-container button:hover {
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
 }
