@@ -48,12 +48,11 @@
               <mat-label>E-mail</mat-label>
               <mat-icon matPrefix>email</mat-icon>
               <input
-                matInput
-                placeholder="E-mail"
-                [formControl]="email"
-                (blur)="emailErrorMessage()"
-                required />
-              <mat-error *ngIf="email.invalid">{{ emailError() }}</mat-error>
+               matInput 
+               placeholder="E-mail" 
+               [formControl]="email" 
+               required />
+              <mat-error *ngIf="email.invalid">{{ getEmailError() }}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">

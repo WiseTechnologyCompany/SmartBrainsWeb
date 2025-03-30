@@ -1,4 +1,3 @@
-import { merge } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
@@ -9,9 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-
+import { EmailValidator } from '../../../utils/validators/EmailValidator';
 
 @Component({
   selector: 'app-criar-conta',
@@ -28,27 +26,25 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, F
     MatInputModule,
     MatIconModule,
     NgxMaskDirective,
-    MatSelectModule
+    MatSelectModule,
   ],
-  providers: [
-    provideNgxMask()
-  ],
+  providers: [provideNgxMask()],
 })
 export class CriarContaComponent {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
+  readonly email = new FormControl('', [Validators.required,  EmailValidator.emailValidator]);
 
   isEditable = true;
   hide = signal(true);
-  emailError = signal('');
 
   formGroupDadosPessoais: FormGroup;
   formGroupLogin: FormGroup;
 
-  constructor(private readonly _formBuilder: FormBuilder) {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.emailErrorMessage());
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
 
+  constructor(private readonly _formBuilder: FormBuilder) {
     this.formGroupDadosPessoais = this._formBuilder.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
@@ -61,28 +57,29 @@ export class CriarContaComponent {
     });
 
     this.formGroupLogin = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, EmailValidator.emailValidator]],
       senha: ['', [Validators.required, Validators.minLength(6)]],
       confirmarSenha: ['', Validators.required],
     });
   }
 
-  emailErrorMessage() {
+  getEmailError(): string {
     if (this.email.hasError('required')) {
-      this.emailError.set('Por favor, digite um e-mail!');
-    } else if (this.email.hasError('email')) {
-      this.emailError.set('Por favor, digite um e-mail válido!');
-    } else {
-      this.emailError.set('');
+      return 'Por favor, digite um e-mail!';
     }
-  }
 
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
+    if (this.email.hasError('invalidEmail')) {
+      return 'Por favor, digite um e-mail válido!';
+    }
+
+    return '';
   }
 
   verificarFormGroupDadosPessoais() {
+    if (this.email.invalid) {
+      this.email.markAsTouched();
+    }
+
     this.formGroupDadosPessoais.markAllAsTouched();
   }
 
