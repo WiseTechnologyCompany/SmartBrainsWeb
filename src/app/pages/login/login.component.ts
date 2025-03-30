@@ -1,7 +1,6 @@
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,10 +32,10 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 export class LoginComponent {
   hide = true;
   private readonly URL = `${environment.API_URL}/auth`;
-  readonly email = new FormControl('', [Validators.required, EmailValidator.emailValidator]);
   readonly password = new FormControl('', [Validators.required]);
+  readonly email = new FormControl('', [Validators.required, EmailValidator.emailValidator]);
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
 
   toggleVisibility(event: MouseEvent) {
     this.hide = !this.hide;
