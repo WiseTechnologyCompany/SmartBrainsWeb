@@ -1,12 +1,10 @@
-import { merge } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -23,49 +21,36 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class LoginComponent {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
+  hide = true;
+  email = new FormControl('', [Validators.required, Validators.email, this.emailValidador]);
   readonly senha = new FormControl('', [Validators.required]);
 
-  emailError = signal('');
-  senhaError = signal('');
-
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
+  toggleVisibility(event: MouseEvent) {
+    this.hide = !this.hide;
     event.stopPropagation();
   }
 
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.emailErrorMessage());
-
-    merge(this.senha.statusChanges, this.senha.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.senhaErrorMessage());
+  emailValidador(control: FormControl): ValidationErrors | null {
+   const email = control.value;
+   return email.endsWith('.com') ? null : { invalidEmail: true };
   }
 
-  emailErrorMessage() {
+  getEmailError(): string {
     if (this.email.hasError('required')) {
-      this.emailError.set('Por favor, digite um e-mail!');
+      return 'Por favor, digite um e-mail!';
     }
-    else if (this.email.hasError('email')) {
-      this.emailError.set('Por favor, digite um e-mail válido!');
+
+    if (this.email.hasError('email') || this.email.hasError('invalidEmail')) {
+      return 'Por favor, digite um e-mail válido!';
     }
-    else {
-      this.emailError.set('');
-    }
+
+    return '';
   }
 
-  senhaErrorMessage() {
-    if (this.senha.hasError('required')) {
-      this.senhaError.set('Por favor, digite uma senha!');
-    } else {
-      this.senhaError.set('');
-    }
+  getSenhaError(): string {
+    return this.senha.hasError('required') ? 'Por favor, digite uma senha!' : '';
   }
 }
