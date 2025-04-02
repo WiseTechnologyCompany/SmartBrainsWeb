@@ -4,14 +4,13 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/Environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ErrorMessages } from '../../../utils/messages/ErrorMessages';
 import { SuccessMessages } from '../../../utils/messages/SuccessMessages';
 import { EmailValidator } from '../../../utils/validators/EmailValidator';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-login',
@@ -61,18 +60,20 @@ export class LoginComponent {
   }
 
   private createRequest(body: any) {
-    this.httpClient.post(this.URL, body).subscribe({
+    this.httpClient.post<{ access_token: string }>(this.URL, body).subscribe({
       next: (response) => {
-        console.log('Login successful', response);
+        if (response.access_token) {
+          localStorage.setItem('token', response.access_token); 
+        }
+
         SuccessMessages.loginSuccessMessage();
         this.router.navigate(['/dashboard']);
       },
-      error: (error) => {
-        console.error('Login failed', error);
+      error: () => {
         ErrorMessages.loginErrorMessage();
       }
     });
-  }  
+  }
 
   getEmailError(): string {
     if (this.email.hasError('required')) {

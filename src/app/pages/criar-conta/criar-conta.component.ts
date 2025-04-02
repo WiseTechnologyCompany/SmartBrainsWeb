@@ -10,6 +10,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { EmailValidator } from '../../../utils/validators/EmailValidator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-criar-conta',
@@ -44,7 +45,7 @@ export class CriarContaComponent {
     event.stopPropagation();
   }
 
-  constructor(private readonly _formBuilder: FormBuilder) {
+  constructor(private readonly httpClient: HttpClient, private readonly _formBuilder: FormBuilder) {
     this.formGroupDadosPessoais = this._formBuilder.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
@@ -62,7 +63,7 @@ export class CriarContaComponent {
       confirmarSenha: ['', Validators.required],
     });
   }
-
+  
   getEmailError(): string {
     if (this.email.hasError('required')) {
       return 'Por favor, digite um e-mail!';

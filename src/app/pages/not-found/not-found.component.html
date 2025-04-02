@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Página não encontrada</title>
+    <style>
+        :root {
+            --primary-blue: #1a73e8;
+            --secondary-blue: #4285f4;
+            --dark-blue: #0d47a1;
+            --light-gray: #f5f7fa;
+            --dark-gray: #444444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .error-container {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1;
+            text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
+            position: relative;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                text-shadow: 5px 5px 20px rgba(26, 115, 232, 0.5);
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-message {
+            margin-left: 30px;
+        }
+
+        .error-title {
+            font-size: 28px;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .error-text {
+            font-size: 16px;
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .home-button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-button:hover {
+            background-color: var(--dark-blue);
+            box-shadow: 0 6px 15px rgba(26, 115, 232, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .home-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+        }
+
+        .graphics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+
+        .finance-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light-gray);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform-origin: center;
+            animation: float 6s infinite;
+        }
+
+        .finance-icon:nth-child(even) {
+            animation-delay: 2s;
+        }
+
+        .finance-icon:nth-child(3n) {
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        .icon-chart {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            margin: auto;
+        }
+
+        .icon-chart::before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 15px;
+            background-color: var(--secondary-blue);
+            bottom: 0;
+            left: 5px;
+            border-radius: 3px;
+        }
+
+        .icon-chart::after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 25px;
+            background-color: var(--primary-blue);
+            bottom: 0;
+            left: 16px;
+            border-radius: 3px;
+        }
+
+        .icon-chart span {
+            position: absolute;
+            width: 6px;
+            height: 35px;
+            background-color: var(--dark-blue);
+            bottom: 0;
+            right: 5px;
+            border-radius: 3px;
+        }
+
+        .icon-coin {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-coin::before {
+            content: "$";
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .icon-calculator {
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark-gray);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-calculator::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 10px;
+            background-color: var(--light-gray);
+            top: 5px;
+            left: 5px;
+            border-radius: 2px;
+        }
+
+        .icon-wallet {
+            width: 40px;
+            height: 30px;
+            background-color: var(--dark-blue);
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .icon-wallet::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 5px;
+            background-color: var(--primary-blue);
+            top: -5px;
+            left: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <div class="error-message">
+                <h1 class="error-title">Oops! Página não encontrada</h1>
+                <p class="error-text">Parece que você tentou acessar uma página que não existe ou foi removida. Verifique o endereço digitado ou volte para a página inicial para continuar gerenciando suas finanças.</p>
+                <a href="/" class="home-button">Voltar para página inicial</a>
+            </div>
+        </div>
+
+        <div class="graphics">
+            <div class="finance-icon">
+                <div class="icon-chart"><span></span></div>
+            </div>
+            <div class="finance-icon">
+                <div class="icon-coin"></div>
+            </div>
+            <div class="finance-icon">
+                <div class="icon-calculator"></div>
+            </div>
+            <div class="finance-icon">
+                <div class="icon-wallet"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
