@@ -61,7 +61,8 @@ export class LoginComponent {
 
   private createRequest(body: any) {
     this.httpClient.post<{ access_token: string }>(this.URL, body).subscribe({
-      next: (response) => {
+      next: (response) => { 
+        
         if (response.access_token) {
           localStorage.setItem('token', response.access_token); 
         }
