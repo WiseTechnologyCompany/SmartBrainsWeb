@@ -64,7 +64,7 @@ export class LoginComponent {
       next: (response) => { 
         
         if (response.access_token) {
-          localStorage.setItem('token', response.access_token); 
+          localStorage.setItem('access_token', response.access_token); 
         }
 
         SuccessMessages.loginSuccessMessage();
