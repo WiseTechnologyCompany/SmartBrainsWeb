@@ -8,7 +8,7 @@ import { CanActivate, Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
   canActivate(): Observable<boolean> {
     return this.authService.isAuthenticated().pipe(

@@ -11,7 +11,7 @@ export class AuthService {
   private readonly access_token = 'access_token';
   private readonly URL = `${environment.API_URL}/auth/check`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getToken(): string | null {
     return localStorage.getItem(this.access_token);
