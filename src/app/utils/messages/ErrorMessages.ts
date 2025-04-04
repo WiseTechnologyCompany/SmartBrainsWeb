@@ -27,8 +27,8 @@ export class ErrorMessages {
   static saveUserErrorMessage() {
     Swal.fire({
       icon: 'error',
-      title: 'Oops! Algo deu errado!',
-      text: 'Verifique seus dados e tente novamente.',
+      title: 'Oops! Senhas diferentes!',
+      text: 'As senhas estão diferentes. Por favor, verifique os dois campos e tente novamente.',
       toast: true,
       position: 'top-end',
       background: '#f8d7da',

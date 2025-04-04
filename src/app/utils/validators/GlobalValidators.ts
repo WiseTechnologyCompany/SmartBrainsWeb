@@ -5,6 +5,8 @@ export class GlobalValidators {
   static dataNascimentoValidator(control: FormControl): ValidationErrors | null {
     const dataNascimento = control.value;
 
+    if (!dataNascimento) return null; 
+
     const dia = dataNascimento.substring(0, 2);  
     const mes = dataNascimento.substring(2, 4);   
     const ano = dataNascimento.substring(4, 8);  

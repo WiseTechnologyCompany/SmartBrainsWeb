@@ -10,10 +10,11 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
 import { environment } from '../../environments/Environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { GlobalFormats } from '../../utils/formats/GlobalFormats';
 import { SuccessMessages } from '../../utils/messages/SuccessMessages';
 import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { GlobalFormats } from '../../utils/formats/GlobalFormats';
+import { ErrorMessages } from '../../utils/messages/ErrorMessages';
 
 @Component({
   selector: 'app-criar-conta',
@@ -35,7 +36,6 @@ import { GlobalFormats } from '../../utils/formats/GlobalFormats';
   providers: [provideNgxMask()],
 })
 export class CriarContaComponent {
-  dataNascimentoFormatada: string = '';
   private readonly URL = `${environment.API_URL}`;
   readonly email = new FormControl('', [Validators.required, GlobalValidators.emailValidator]);
 
@@ -96,6 +96,14 @@ export class CriarContaComponent {
 
   verificarFormGroupLogin() {
     this.formGroupLogin.markAllAsTouched();
+    const senha = this.formGroupLogin.get('senha')?.value;
+    const confirmarSenha = this.formGroupLogin.get('confirmarSenha')?.value;
+
+    if (senha === confirmarSenha) {
+      this.sendData();
+    }
+
+    ErrorMessages.saveUserErrorMessage();
   }
 
   sendData() {
@@ -104,20 +112,15 @@ export class CriarContaComponent {
   }
 
   sendUserData() {
-    if (this.formGroupDadosPessoais.invalid) {
-      return;
-    }
     const body = this.createBodyUser();
     this.saveUserRequest(body);
   }
 
   sendLoginData() {
-    if (this.formGroupLogin.invalid) {
-      return;
-    }
     const body = this.createBodyLogin();
     this.saveLoginRequest(body);
   }
+
   private createBodyUser() {
     return {
       nome: this.formGroupDadosPessoais.get('nome')?.value,
