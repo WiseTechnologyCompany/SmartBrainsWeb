@@ -8,8 +8,8 @@ import { environment } from '../../environments/Environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ErrorMessages } from '../../utils/messages/ErrorMessages';
-import { EmailValidator } from '../../utils/validators/EmailValidator';
 import { SuccessMessages } from '../../utils/messages/SuccessMessages';
+import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -32,7 +32,7 @@ export class LoginComponent {
   hide = true;
   private readonly URL = `${environment.API_URL}/auth`;
   readonly password = new FormControl('', [Validators.required]);
-  readonly email = new FormControl('', [Validators.required, EmailValidator.emailValidator]);
+  readonly email = new FormControl('', [Validators.required, GlobalValidators.emailValidator]);
 
   constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
 

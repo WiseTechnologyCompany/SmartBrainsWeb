@@ -40,6 +40,9 @@
               <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')" >
                 Data de Nascimento é obrigatório!
               </mat-error>
+              <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('invalidDate') && formGroupDadosPessoais.get('dataNascimento')?.touched">
+                Data de Nascimento Inválida!
+              </mat-error>
             </mat-form-field>
           </div>
 
@@ -60,6 +63,9 @@
               <input matInput formControlName="cpf" mask="000.000.000-00" />
               <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('required')" >
                 CPF é obrigatório!
+              </mat-error>
+              <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('invalidCPF') && formGroupDadosPessoais.get('cpf')?.touched">
+                CPF Inválido!
               </mat-error>
             </mat-form-field>
 
@@ -95,11 +101,11 @@
             <mat-form-field appearance="outline">
               <mat-label>Estado Civil</mat-label>
               <mat-select formControlName="estadoCivil">
-                <mat-option value="solteiro">Solteiro</mat-option>
-                <mat-option value="uniaoEstavel">União Estável</mat-option>
-                <mat-option value="casado">Casado</mat-option>
-                <mat-option value="divorciado">Divorciado</mat-option>
-                <mat-option value="viuvo">Viúvo</mat-option>
+                <mat-option value="1">Solteiro</mat-option>
+                <mat-option value="2">União Estável</mat-option>
+                <mat-option value="3">Casado</mat-option>
+                <mat-option value="4">Divorciado</mat-option>
+                <mat-option value="5">Viúvo</mat-option>
               </mat-select>
               <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')" >
                 Selecione um Estado Civil!
@@ -139,19 +145,25 @@
               <mat-icon matPrefix>lock</mat-icon>
               <input
                 matInput
-                [type]="hide() ? 'password' : 'text'"
+                [type]="hidePassword() ? 'password' : 'text'"
                 formControlName="senha" />
               <button
                 mat-icon-button
                 matSuffix
-                (click)="clickEvent($event)"
+                (click)="clickEventPassword($event)"
                 [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide()" >
+                [attr.aria-pressed]="hidePassword()" >
                 <mat-icon>
-                  {{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+                  {{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
               </button>
-              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('required')" >
-                Senha é obrigatório!
+              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('required')">
+                Senha é obrigatória!
+              </mat-error>
+              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('minlength')">
+                A senha deve ter no mínimo 10 caracteres!
+              </mat-error>
+              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('senhaFraca')">
+                A senha deve conter letra maiúscula, minúscula, número e caractere especial.
               </mat-error>
             </mat-form-field>
           </div>
@@ -162,20 +174,20 @@
               <mat-icon matPrefix>lock</mat-icon>
               <input
                 matInput
-                [type]="hide() ? 'password' : 'text'"
+                [type]="hideConfirmPassword() ? 'password' : 'text'"
                 formControlName="confirmarSenha" />
               <button
                 mat-icon-button
                 matSuffix
-                (click)="clickEvent($event)"
+                (click)="clickEventConfirmPassword($event)"
                 [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide()" >
+                [attr.aria-pressed]="hideConfirmPassword()" >
                 <mat-icon>
-                  {{ hide() ? "visibility_off" : "visibility" }}
+                  {{ hideConfirmPassword() ? "visibility_off" : "visibility" }}
                   </mat-icon>
               </button>
-              <mat-error *ngIf=" formGroupLogin.get('confirmarSenha')?.hasError('required')" >
-                Confirmar Senha é obrigatório!
+              <mat-error *ngIf="formGroupLogin.get('confirmarSenha')?.hasError('required')">
+                Confirmar senha é obrigatória!
               </mat-error>
             </mat-form-field>
           </div>
