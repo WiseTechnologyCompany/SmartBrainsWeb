@@ -1,0 +1,133 @@
+$cor-primaria: #76a7b9;
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.breadcrumb {
+  align-items: center;
+  color: #606c88;
+  display: flex;
+}
+
+.breadcrumb-container {
+  padding: 1%;
+  position: relative;
+}
+
+.curve {
+  background-color: #f0f2f5;
+  border-top-left-radius: 40%;
+  box-shadow: -20px -20px 0 0 white;
+  height: 200%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 5%;
+}
+
+.icon {
+  align-items: center;
+  color: #606c88;
+  cursor: pointer;
+  display: flex;
+  height: 5%;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 40%;
+  margin-top: 5%;
+}
+
+.logo {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 5%;
+  justify-content: center;
+  margin-bottom: 50%;
+  margin-top: 10%;
+  width: 50px;
+}
+
+.logo-wisefinances {
+  width: 135%;
+  margin-left: 15%;
+}
+
+.main-content {
+  background-color: #f0f2f5;
+  flex: 1;
+  margin-left: 4%;
+  min-height: 100vh;
+}
+
+.sidebar {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 0.9%;
+  position: fixed;
+  width: 80px;
+  z-index: 100;
+}
+
+.top-nav {
+  align-items: center;
+  background-color: #ffffff;
+  display: flex;
+  height: 90px;
+  justify-content: end;
+  padding: 0 45px;
+  position: relative;
+}
+
+.user-avatar {
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: $cor-primaria;
+  cursor: pointer;
+  display: flex;
+  font-weight: bold;
+  height: 54%;
+  justify-content: center;
+  width: 2.8%;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #212529;
+  margin: 0;
+}
+
+.user-role {
+  color: #6c757d;
+  font-size: 14px;
+  margin: 0;
+}
