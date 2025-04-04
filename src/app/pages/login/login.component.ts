@@ -4,12 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { environment } from '../../../environments/Environment';
+import { environment } from '../../environments/Environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ErrorMessages } from '../../../utils/messages/ErrorMessages';
-import { SuccessMessages } from '../../../utils/messages/SuccessMessages';
-import { EmailValidator } from '../../../utils/validators/EmailValidator';
+import { ErrorMessages } from '../../utils/messages/ErrorMessages';
+import { EmailValidator } from '../../utils/validators/EmailValidator';
+import { SuccessMessages } from '../../utils/messages/SuccessMessages';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({

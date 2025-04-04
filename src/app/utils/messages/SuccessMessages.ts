@@ -22,4 +22,25 @@ export class SuccessMessages {
       },
     });
   }
+
+  // Cadastro
+  static saveUserSuccessMessage() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Sucesso!',
+      text: 'Usuário cadastrado com sucesso!',
+      toast: true,
+      position: 'top-end',
+      background: '#dff0d8',
+      color: '#000000',
+      width: '30%',
+      showConfirmButton: false,
+      timer: 4750,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+  }
 }
