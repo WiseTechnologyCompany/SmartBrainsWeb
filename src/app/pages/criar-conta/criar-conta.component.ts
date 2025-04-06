@@ -99,11 +99,12 @@ export class CriarContaComponent {
     const senha = this.formGroupLogin.get('senha')?.value;
     const confirmarSenha = this.formGroupLogin.get('confirmarSenha')?.value;
 
-    if (senha === confirmarSenha) {
-      this.sendData();
+    if (senha !== confirmarSenha) {
+      this.formGroupLogin.get('senha')?.setErrors({ senhaDiferente: true });
+      this.formGroupLogin.get('confirmarSenha')?.setErrors({ senhaDiferente: true });
     }
-
-    ErrorMessages.saveUserErrorMessage();
+    
+    this.sendData();
   }
 
   sendData() {
