@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: 'esqueceu-senha', component: EsqueceuSenhaComponent },
   { path: 'criar-conta', component: CriarContaComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'access-denied', component: AccessDeniedComponent, canActivate: [AuthGuard] },
+  { path: 'access-denied', component: AccessDeniedComponent },
   { path: '**', component: NotFoundComponent }, 
 ];
 

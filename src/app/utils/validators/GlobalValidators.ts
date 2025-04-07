@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormControl, ValidationErrors } from "@angular/forms";
 
 export class GlobalValidators {
 
@@ -20,10 +20,10 @@ export class GlobalValidators {
   }
 
   static emailValidator(control: FormControl): ValidationErrors | null {
-    const email = control.value?.toLowerCase() || '';
+    const email = control.value?.toLowerCase() ?? '';
   
     const contemArroba = email.includes('@');
-    const terminaCorretamente = email.endsWith('.com') || email.endsWith('.br');
+    const terminaCorretamente = email.endsWith('.com') ?? email.endsWith('.br');
     const contemTeste = email.includes('teste');
   
     if (!contemArroba || !terminaCorretamente || contemTeste) {

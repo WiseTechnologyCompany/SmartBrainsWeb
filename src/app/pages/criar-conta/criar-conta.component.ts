@@ -14,7 +14,6 @@ import { GlobalFormats } from '../../utils/formats/GlobalFormats';
 import { SuccessMessages } from '../../utils/messages/SuccessMessages';
 import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { ErrorMessages } from '../../utils/messages/ErrorMessages';
 
 @Component({
   selector: 'app-criar-conta',

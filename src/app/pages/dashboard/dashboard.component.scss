@@ -83,6 +83,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   justify-content: end;
   padding: 0 45px;
   position: relative;
+  gap: 10px;
 }
 
 .user-avatar {
@@ -96,18 +97,6 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   height: 54%;
   justify-content: center;
   width: 2.8%;
-}
-
-.top-nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
   overflow: hidden;
 }
 
