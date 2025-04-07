@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
 import { environment } from '../../environments/Environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GlobalFormats } from '../../utils/formats/GlobalFormats';
 import { SuccessMessages } from '../../utils/messages/SuccessMessages';
@@ -103,12 +103,7 @@ export class CriarContaComponent {
       this.formGroupLogin.get('confirmarSenha')?.setErrors({ senhaDiferente: true });
     }
     
-    this.sendData();
-  }
-
-  sendData() {
     this.sendLoginData();
-    this.sendUserData();
   }
 
   sendUserData() {
@@ -125,50 +120,55 @@ export class CriarContaComponent {
     return {
       nome: this.formGroupDadosPessoais.get('nome')?.value,
       sobrenome: this.formGroupDadosPessoais.get('sobrenome')?.value,
-      dataNascimento: GlobalFormats.formatarData(this.formGroupDadosPessoais.get('dataNascimento')?.value),
+      email: this.email.value,
       cpf: GlobalFormats.formatarCPF(this.formGroupDadosPessoais.get('cpf')?.value),
-      telefone: GlobalFormats.formatarTelefone(this.formGroupDadosPessoais.get('telefone')?.value),
+      dataNascimento: GlobalFormats.formatarData(this.formGroupDadosPessoais.get('dataNascimento')?.value),
       profissao: this.formGroupDadosPessoais.get('profissao')?.value,
       empresa: this.formGroupDadosPessoais.get('empresa')?.value,
-      estadoCivil: this.formGroupDadosPessoais.get('estadoCivil')?.value,
-      email: this.email.value || '',
+      telefone: GlobalFormats.formatarTelefone(this.formGroupDadosPessoais.get('telefone')?.value),
+      estadoCivil: this.formGroupDadosPessoais.get('estadoCivil')?.value
     };
   }
 
   private createBodyLogin() {
     return {
-      email: this.email.value || '',
-      senha: this.formGroupLogin.get('senha')?.value
+      email: this.email.value ?? '',
+      password: this.formGroupLogin.get('senha')?.value
     };
   }
 
   private getTokenRequest(body: any) {
-    this.httpClient.post<{ access_token: string }>(`${this.URL}/usuarios`, body).subscribe({
-      next: () => {
-        SuccessMessages.loginSuccessMessage();
-        this.router.navigate(['/dashboard']);
+    this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body).subscribe({
+      next: (response) => {
+        localStorage.setItem('access_token', response.access_token);
+  
+        setTimeout(() => {
+          this.sendUserData();
+        }, 1000);
       },
     });
   }
+  
 
-  private saveUserRequest(body: any) {
-    this.httpClient.post(`${this.URL}/auth/save`, body).subscribe({
+  private saveUserRequest(body: any) {  
+    const access_token = localStorage.getItem('access_token'); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${access_token}`
+    });
+  
+    this.httpClient.post(`${this.URL}/usuarios`, body, { headers }).subscribe({
       next: () => {
-        this.getTokenRequest(body);
-      },
-      error: (error) => {
-        console.error('Login failed:', error);
+        this.router.navigate(['/dashboard']);
+        SuccessMessages.saveUserSuccessMessage();
       },
     });
   }
+  
 
   private saveLoginRequest(body: any) {
     this.httpClient.post(`${this.URL}/auth/save`, body).subscribe({
       next: () => {
         this.getTokenRequest(body);
-      },
-      error: (error) => {
-        console.error('Login failed:', error);
       },
     });
   }
