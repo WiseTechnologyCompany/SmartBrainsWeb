@@ -36,7 +36,7 @@ export class GlobalValidators {
   static senhaForteValidator(control: AbstractControl): ValidationErrors | null {
     const senha = control.value;
 
-    if (!senha) return null; // evita erro se estiver vazio
+    if (!senha) return null;
 
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
 
@@ -46,13 +46,17 @@ export class GlobalValidators {
   }
 
   static CPFValidator(control: FormControl): ValidationErrors | null {
-    const valor = GlobalValidators.removerMascara(control.value);
+    const cpf = control.value;
+
+    if (!cpf) return null;
+
+    const cpfSemMascara = GlobalValidators.removerMascara(cpf);
   
-    if (!GlobalValidators.temTamanhoValido(valor) || GlobalValidators.todosDigitosIguais(valor)) {
+    if (!GlobalValidators.temTamanhoValido(cpfSemMascara) || GlobalValidators.todosDigitosIguais(cpfSemMascara)) {
       return { invalidCPF: true };
     }
   
-    if (!GlobalValidators.digitosVerificadoresValidos(valor)) {
+    if (!GlobalValidators.digitosVerificadoresValidos(cpfSemMascara)) {
       return { invalidCPF: true };
     }
   
