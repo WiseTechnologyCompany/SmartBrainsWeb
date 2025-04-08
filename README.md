@@ -27,6 +27,18 @@
   <br> 
 
 
+## 🔍 Testes
+
+* ![Bugs](https://sonarcloud.io/api/project_badges/measure?project=WiseFinances_SmartBrainsWeb&metric=bugs)
+
+* ![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=WiseFinances_SmartBrainsWeb&metric=code_smells)
+
+* ![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=WiseFinances_SmartBrainsWeb&metric=ncloc)
+  
+
+ <br> 
+
+
 ## 🛠 Servidor de Desenvolvimento
 
 Para iniciar o servidor de desenvolvimento local, use o seguinte comando:
