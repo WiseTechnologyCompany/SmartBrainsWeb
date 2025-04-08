@@ -74,22 +74,3 @@ ng build
 ```
 
 Isso irá compilar o seu projeto e armazenar os arquivos gerados no diretório `dist/`. Por padrão, a compilação para produção otimiza a aplicação para melhor desempenho e velocidade.
-
-<br> 
-
-## 🔍 Executando os Testes
-
-Para executar os testes unitários utilizando o [Karma](https://karma-runner.github.io), use o seguinte comando:
-
-```bash
-ng test
-```
-
-<br> 
-
-
-Para executar os testes de ponta a ponta (e2e), use o seguinte comando:
-
-```bash
-ng e2e
-```
