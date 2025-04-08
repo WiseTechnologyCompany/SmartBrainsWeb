@@ -23,7 +23,7 @@ export class GlobalValidators {
     const email = control.value?.toLowerCase() ?? '';
   
     const contemArroba = email.includes('@');
-    const terminaCorretamente = email.endsWith('.com') ?? email.endsWith('.br');
+    const terminaCorretamente = email.endsWith('.com') || email.endsWith('.br');
     const contemTeste = email.includes('teste');
   
     if (!contemArroba || !terminaCorretamente || contemTeste) {

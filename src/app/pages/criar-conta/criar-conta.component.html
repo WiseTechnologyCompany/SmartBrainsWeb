@@ -165,9 +165,6 @@
               <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('senhaFraca')">
                 A senha deve conter letra maiúscula, minúscula, número e caractere especial.
               </mat-error>
-              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('senhaDiferente')">
-                As senhas precisam ser iguais!
-              </mat-error>
             </mat-form-field>
           </div>
 
