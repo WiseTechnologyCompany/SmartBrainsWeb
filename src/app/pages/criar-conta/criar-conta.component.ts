@@ -157,8 +157,13 @@ export class CriarContaComponent {
   
     this.httpClient.post(`${this.URL}/usuarios`, body, { headers }).subscribe({
       next: () => {
-        this.router.navigate(['/dashboard']);
-        SuccessMessages.saveUserSuccessMessage();
+        this.router.navigate(['/dashboard'], {
+          queryParams: {
+            nome: body.nome,
+            profissao: body.profissao,
+            empresa: body.empresa
+          }
+        });
       },
     });
   }
