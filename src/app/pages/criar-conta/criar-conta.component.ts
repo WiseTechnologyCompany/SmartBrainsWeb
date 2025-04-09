@@ -188,6 +188,13 @@ export class CriarContaComponent {
     await this.getTokenRequest(body);
   }
 
+  async verificarEmailExistente() {
+    const emailControl = this.formGroupDadosPessoais.get('email');
+    if (emailControl && emailControl.valid) {
+      await this.checkEmail(emailControl.value);
+    }
+  }
+  
   private async checkEmail(email: string): Promise<boolean> {
     const response = await firstValueFrom(this.httpClient.post<{ emailAlreadyExists: boolean }>( `${this.URL}/auth/check/email`, { email }));
 
@@ -197,12 +204,5 @@ export class CriarContaComponent {
     }
 
     return false;
-  }
-
-  async verificarEmailExistente() {
-    const emailControl = this.formGroupDadosPessoais.get('email');
-    if (emailControl && emailControl.valid) {
-      await this.checkEmail(emailControl.value);
-    }
   }
 }

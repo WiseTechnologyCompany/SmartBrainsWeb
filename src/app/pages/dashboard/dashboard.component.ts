@@ -9,7 +9,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  constructor(private route: ActivatedRoute) {}
+  constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
