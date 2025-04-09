@@ -16,7 +16,8 @@
             <mat-form-field appearance="outline">
               <mat-label>Nome</mat-label>
               <input matInput formControlName="nome" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('nome')?.hasError('required')" >
+              <mat-error
+                *ngIf="formGroupDadosPessoais.get('nome')?.hasError('required')">
                 Nome é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -24,8 +25,8 @@
             <mat-form-field appearance="outline">
               <mat-label>Sobrenome</mat-label>
               <input matInput formControlName="sobrenome" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('sobrenome')?.hasError('required')" >
-              Sobrenome é obrigatório!
+              <mat-error *ngIf="formGroupDadosPessoais.get('sobrenome')?.hasError('required')">
+                Sobrenome é obrigatório!
               </mat-error>
             </mat-form-field>
 
@@ -34,10 +35,10 @@
               <input
                 matInput
                 formControlName="dataNascimento"
-                mask="00/00/0000" />
+                mask="00/00/0000"/>
               <mat-hint>DD/MM/YYYY</mat-hint>
               <mat-icon matPrefix>calendar_month</mat-icon>
-              <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')" >
+              <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')">
                 Data de Nascimento é obrigatório!
               </mat-error>
               <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('invalidDate') && formGroupDadosPessoais.get('dataNascimento')?.touched">
@@ -51,17 +52,20 @@
               <mat-label>E-mail</mat-label>
               <mat-icon matPrefix>email</mat-icon>
               <input
-               matInput 
-               placeholder="E-mail" 
-               [formControl]="email" 
-               required />
-              <mat-error *ngIf="email.invalid">{{ getEmailError() }}</mat-error>
+                matInput
+                placeholder="E-mail"
+                formControlName="email"
+                (blur)="verificarEmailExistente()"
+                required />
+              <mat-error *ngIf="formGroupDadosPessoais.get('email')?.invalid && formGroupDadosPessoais.get('email')?.touched">
+                {{ getEmailError() }}
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
               <mat-label>CPF</mat-label>
               <input matInput formControlName="cpf" mask="000.000.000-00" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('required')" >
+              <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('required')">
                 CPF é obrigatório!
               </mat-error>
               <mat-error *ngIf="formGroupDadosPessoais.get('cpf')?.hasError('invalidCPF') && formGroupDadosPessoais.get('cpf')?.touched">
@@ -74,9 +78,9 @@
               <input
                 matInput
                 formControlName="telefone"
-                mask="(00) 00000-0000" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('telefone')?.hasError('required')" >
-                  Telefone é obrigatório!
+                mask="(00) 00000-0000"/>
+              <mat-error *ngIf="formGroupDadosPessoais.get('telefone')?.hasError('required')">
+                Telefone é obrigatório!
               </mat-error>
             </mat-form-field>
           </div>
@@ -85,7 +89,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Profissão</mat-label>
               <input matInput formControlName="profissao" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('profissao')?.hasError('required')" >
+              <mat-error *ngIf="formGroupDadosPessoais.get('profissao')?.hasError('required')">
                 Profissão é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -93,7 +97,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Empresa</mat-label>
               <input matInput formControlName="empresa" />
-              <mat-error *ngIf="formGroupDadosPessoais.get('empresa')?.hasError('required')" >
+              <mat-error *ngIf="formGroupDadosPessoais.get('empresa')?.hasError('required')">
                 Empresa é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -107,7 +111,7 @@
                 <mat-option value="4">Divorciado</mat-option>
                 <mat-option value="5">Viúvo</mat-option>
               </mat-select>
-              <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')" >
+              <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')">
                 Selecione um Estado Civil!
               </mat-error>
             </mat-form-field>
@@ -120,7 +124,7 @@
             <button
               mat-fab
               matStepperNext
-              (click)="verificarFormGroupDadosPessoais()" >
+              (click)="verificarFormGroupDadosPessoais()">
               PRÓXIMO
             </button>
           </div>
@@ -152,9 +156,8 @@
                 matSuffix
                 (click)="clickEventPassword($event)"
                 [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hidePassword()" >
-                <mat-icon>
-                  {{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
+                [attr.aria-pressed]="hidePassword()">
+                <mat-icon> {{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
               </button>
               <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('required')">
                 Senha é obrigatória!
@@ -163,7 +166,7 @@
                 A senha deve ter no mínimo 10 caracteres!
               </mat-error>
               <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('senhaFraca')">
-                A senha deve conter letra maiúscula, minúscula, número e caractere especial.
+                A senha deve conter letra maiúscula, minúscula, número e caractere especial!
               </mat-error>
             </mat-form-field>
           </div>
@@ -175,16 +178,16 @@
               <input
                 matInput
                 [type]="hideConfirmPassword() ? 'password' : 'text'"
-                formControlName="confirmarSenha" />
+                formControlName="confirmarSenha"/>
               <button
                 mat-icon-button
                 matSuffix
                 (click)="clickEventConfirmPassword($event)"
                 [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hideConfirmPassword()" >
+                [attr.aria-pressed]="hideConfirmPassword()">
                 <mat-icon>
                   {{ hideConfirmPassword() ? "visibility_off" : "visibility" }}
-                  </mat-icon>
+                </mat-icon>
               </button>
               <mat-error *ngIf="formGroupLogin.get('confirmarSenha')?.hasError('required')">
                 Confirmar senha é obrigatória!
@@ -199,7 +202,7 @@
             <button
               class="btn-finalizar"
               mat-fab
-              (click)="verificarFormGroupLogin()" >
+              (click)="verificarFormGroupLogin()">
               FINALIZAR
             </button>
           </div>

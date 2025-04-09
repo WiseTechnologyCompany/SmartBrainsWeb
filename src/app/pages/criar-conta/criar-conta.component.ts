@@ -1,3 +1,4 @@
+import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -11,7 +12,6 @@ import { environment } from '../../environments/Environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GlobalFormats } from '../../utils/formats/GlobalFormats';
-import { SuccessMessages } from '../../utils/messages/SuccessMessages';
 import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 
@@ -19,6 +19,7 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, F
   selector: 'app-criar-conta',
   templateUrl: './criar-conta.component.html',
   styleUrl: './criar-conta.component.scss',
+  standalone: true,
   imports: [
     CommonModule,
     RouterModule,
@@ -36,7 +37,6 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, F
 })
 export class CriarContaComponent {
   private readonly URL = `${environment.API_URL}`;
-  readonly email = new FormControl('', [Validators.required, GlobalValidators.emailValidator]);
 
   isEditable = true;
   hidePassword = signal(true);
@@ -45,7 +45,11 @@ export class CriarContaComponent {
   formGroupDadosPessoais: FormGroup;
   formGroupLogin: FormGroup;
 
-  constructor(private readonly router: Router, private readonly httpClient: HttpClient, private readonly _formBuilder: FormBuilder) {
+  constructor(
+    private readonly router: Router,
+    private readonly httpClient: HttpClient,
+    private readonly _formBuilder: FormBuilder
+  ) {
     this.formGroupDadosPessoais = this._formBuilder.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
@@ -54,14 +58,31 @@ export class CriarContaComponent {
       telefone: ['', Validators.required],
       profissao: ['', Validators.required],
       empresa: ['', Validators.required],
-      estadoCivil: ['', Validators.required]
+      estadoCivil: ['', Validators.required],
+      email: ['', [Validators.required, GlobalValidators.emailValidator]],
     });
 
     this.formGroupLogin = this._formBuilder.group({
-      email: new FormControl({ value: this.email.value, disabled: true }, { nonNullable: true }),
+      email: new FormControl({ value: '', disabled: true }, { nonNullable: true }),
       senha: ['', [Validators.required, Validators.minLength(10), GlobalValidators.senhaForteValidator]],
-      confirmarSenha: ['', Validators.required]
-    }); 
+      confirmarSenha: ['', Validators.required],
+    });
+  }
+
+  getEmailError(): string {
+    const email = this.formGroupDadosPessoais.get('email');
+    if (email?.hasError('required')) {
+      return 'O campo e-mail é obrigatório.';
+    }
+
+    if (email?.hasError('invalidEmail')) {
+      return 'Formato de e-mail inválido.';
+    }
+
+    if (email?.hasError('emailJaCadastrado')) {
+      return 'Este e-mail já está cadastrado.';
+    }
+    return '';
   }
 
   clickEventPassword(event: MouseEvent) {
@@ -74,106 +95,114 @@ export class CriarContaComponent {
     event.stopPropagation();
   }
 
-  getEmailError(): string {
-    if (this.email.hasError('required')) {
-      return 'Por favor, digite um e-mail!';
-    }
-    if (this.email.hasError('invalidEmail')) {
-      return 'Por favor, digite um e-mail válido!';
-    }
-    return '';
-  }
-
   verificarFormGroupDadosPessoais() {
-    if (this.email.invalid) {
-      this.email.markAsTouched();
+    const emailControl = this.formGroupDadosPessoais.get('email');
+
+    if (emailControl?.invalid) {
+      emailControl.markAsTouched();
+      this.formGroupDadosPessoais.markAllAsTouched();
+      return;
     }
 
     this.formGroupDadosPessoais.markAllAsTouched();
-    this.formGroupLogin.get('email')?.setValue(this.email.value);
+    this.formGroupLogin.get('email')?.setValue(emailControl?.value);
   }
 
   verificarFormGroupLogin() {
     this.formGroupLogin.markAllAsTouched();
+
     const senha = this.formGroupLogin.get('senha')?.value;
     const confirmarSenha = this.formGroupLogin.get('confirmarSenha')?.value;
 
     if (senha !== confirmarSenha) {
       this.formGroupLogin.get('confirmarSenha')?.setErrors({ senhaDiferente: true });
+      return;
     }
-    
+
     this.sendLoginData();
   }
 
-  sendUserData() {
+  async sendUserData() {
     const body = this.createBodyUser();
-    this.saveUserRequest(body);
+    await this.saveUserRequest(body);
   }
 
-  sendLoginData() {
+  async sendLoginData() {
     const body = this.createBodyLogin();
-    this.saveLoginRequest(body);
+    await this.saveLoginRequest(body);
   }
 
   private createBodyUser() {
+    const dados = this.formGroupDadosPessoais;
     return {
-      nome: this.formGroupDadosPessoais.get('nome')?.value,
-      sobrenome: this.formGroupDadosPessoais.get('sobrenome')?.value,
-      email: this.email.value,
-      cpf: GlobalFormats.formatarCPF(this.formGroupDadosPessoais.get('cpf')?.value),
-      dataNascimento: GlobalFormats.formatarData(this.formGroupDadosPessoais.get('dataNascimento')?.value),
-      profissao: this.formGroupDadosPessoais.get('profissao')?.value,
-      empresa: this.formGroupDadosPessoais.get('empresa')?.value,
-      telefone: GlobalFormats.formatarTelefone(this.formGroupDadosPessoais.get('telefone')?.value),
-      estadoCivil: this.formGroupDadosPessoais.get('estadoCivil')?.value
+      nome: dados.get('nome')?.value,
+      sobrenome: dados.get('sobrenome')?.value,
+      email: dados.get('email')?.value,
+      cpf: GlobalFormats.formatarCPF(dados.get('cpf')?.value),
+      dataNascimento: GlobalFormats.formatarData(dados.get('dataNascimento')?.value),
+      profissao: dados.get('profissao')?.value,
+      empresa: dados.get('empresa')?.value,
+      telefone: GlobalFormats.formatarTelefone(dados.get('telefone')?.value),
+      estadoCivil: dados.get('estadoCivil')?.value,
     };
   }
 
   private createBodyLogin() {
     return {
-      email: this.email.value ?? '',
-      password: this.formGroupLogin.get('senha')?.value
+      email: this.formGroupDadosPessoais.get('email')?.value ?? '',
+      password: this.formGroupLogin.get('senha')?.value,
     };
   }
 
-  private getTokenRequest(body: any) {
-    this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body).subscribe({
-      next: (response) => {
-        localStorage.setItem('access_token', response.access_token);
-  
-        setTimeout(() => {
-          this.sendUserData();
-        }, 1000);
+  private async getTokenRequest(body: any) {
+    const response = await firstValueFrom(
+      this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body)
+    );
+
+    localStorage.setItem('access_token', response.access_token);
+
+    setTimeout(async () => {
+      await this.sendUserData();
+    }, 1000);
+  }
+
+  private async saveUserRequest(body: any) {
+    const access_token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({ Authorization: `Bearer ${access_token}` });
+
+    await firstValueFrom(
+      this.httpClient.post(`${this.URL}/usuarios`, body, { headers })
+    );
+
+    this.router.navigate(['/dashboard'], {
+      queryParams: {
+        nome: body.nome,
+        profissao: body.profissao,
+        empresa: body.empresa,
       },
     });
   }
-  
 
-  private saveUserRequest(body: any) {  
-    const access_token = localStorage.getItem('access_token'); 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${access_token}`
-    });
-  
-    this.httpClient.post(`${this.URL}/usuarios`, body, { headers }).subscribe({
-      next: () => {
-        this.router.navigate(['/dashboard'], {
-          queryParams: {
-            nome: body.nome,
-            profissao: body.profissao,
-            empresa: body.empresa
-          }
-        });
-      },
-    });
+  private async saveLoginRequest(body: any) {
+    await firstValueFrom(this.httpClient.post(`${this.URL}/auth/save`, body));
+    await this.getTokenRequest(body);
   }
-  
 
-  private saveLoginRequest(body: any) {
-    this.httpClient.post(`${this.URL}/auth/save`, body).subscribe({
-      next: () => {
-        this.getTokenRequest(body);
-      },
-    });
+  private async checkEmail(email: string): Promise<boolean> {
+    const response = await firstValueFrom(this.httpClient.post<{ emailAlreadyExists: boolean }>( `${this.URL}/auth/check/email`, { email }));
+
+    if (response.emailAlreadyExists) {
+      this.formGroupDadosPessoais.get('email')?.setErrors({ emailJaCadastrado: true });
+      return true;
+    }
+
+    return false;
+  }
+
+  async verificarEmailExistente() {
+    const emailControl = this.formGroupDadosPessoais.get('email');
+    if (emailControl && emailControl.valid) {
+      await this.checkEmail(emailControl.value);
+    }
   }
 }
