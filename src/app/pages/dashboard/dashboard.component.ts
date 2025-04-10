@@ -11,18 +11,6 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 export class DashboardComponent {
   constructor(private readonly route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.route.queryParamMap.subscribe((params) => {
-      const nome = params.get('nome');
-      const profissao = params.get('profissao');
-      const empresa = params.get('empresa');
-
-      console.log('Nome:', nome);
-      console.log('Profissão:', profissao);
-      console.log('Empresa:', empresa);
-    });
-  }
-
   getName() {
     return this.route.snapshot.queryParamMap.get('nome');
   }
