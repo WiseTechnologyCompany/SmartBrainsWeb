@@ -71,6 +71,7 @@ export class CriarContaComponent {
 
   getEmailError(): string {
     const email = this.formGroupDadosPessoais.get('email');
+
     if (email?.hasError('required')) {
       return 'O campo e-mail é obrigatório.';
     }
@@ -134,6 +135,7 @@ export class CriarContaComponent {
 
   private createBodyUser() {
     const dados = this.formGroupDadosPessoais;
+
     return {
       nome: dados.get('nome')?.value,
       sobrenome: dados.get('sobrenome')?.value,
@@ -155,9 +157,7 @@ export class CriarContaComponent {
   }
 
   private async getTokenRequest(body: any) {
-    const response = await firstValueFrom(
-      this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body)
-    );
+    const response = await firstValueFrom(this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body));
 
     localStorage.setItem('access_token', response.access_token);
 
@@ -167,12 +167,7 @@ export class CriarContaComponent {
   }
 
   private async saveUserRequest(body: any) {
-    const access_token = localStorage.getItem('access_token');
-    const headers = new HttpHeaders({ Authorization: `Bearer ${access_token}` });
-
-    await firstValueFrom(
-      this.httpClient.post(`${this.URL}/usuarios`, body, { headers })
-    );
+    await firstValueFrom(this.httpClient.post(`${this.URL}/usuarios`, body));
 
     this.router.navigate(['/dashboard'], {
       queryParams: {

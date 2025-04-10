@@ -1,4 +1,6 @@
+import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { UsuarioInfoDTO } from './usuarioInfoDTO';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +10,6 @@ import { environment } from '../../environments/Environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ErrorMessages } from '../../utils/messages/ErrorMessages';
-import { SuccessMessages } from '../../utils/messages/SuccessMessages';
 import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -30,7 +31,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 })
 export class LoginComponent {
   hide = true;
-  private readonly URL = `${environment.API_URL}/auth`;
+  private readonly URL = `${environment.API_URL}`;
   readonly password = new FormControl('', [Validators.required]);
   readonly email = new FormControl('', [Validators.required, GlobalValidators.emailValidator]);
 
@@ -41,7 +42,7 @@ export class LoginComponent {
     event.stopPropagation();
   }
 
-  sendData() {
+  async sendData() {
     if (this.email.invalid || this.password.invalid) {
       this.email.markAsTouched();
       this.password.markAsTouched();
@@ -49,7 +50,7 @@ export class LoginComponent {
     }
 
     const body = this.createBody();
-    this.createRequest(body);
+    await this.createRequest(body);
   }
 
   private createBody() {
@@ -57,23 +58,6 @@ export class LoginComponent {
       email: this.email.value,
       password: this.password.value,
     };
-  }
-
-  private createRequest(body: any) {
-    this.httpClient.post<{ access_token: string }>(this.URL, body).subscribe({
-      next: (response) => { 
-        
-        if (response.access_token) {
-          localStorage.setItem('access_token', response.access_token); 
-        }
-
-        SuccessMessages.loginSuccessMessage();
-        this.router.navigate(['/dashboard']);
-      },
-      error: () => {
-        ErrorMessages.loginErrorMessage();
-      }
-    });
   }
 
   getEmailError(): string {
@@ -90,5 +74,37 @@ export class LoginComponent {
 
   getSenhaError(): string {
     return this.password.hasError('required') ? 'Por favor, digite uma senha!' : '';
+  }
+
+  private async createRequest(body: any) {
+    try {
+      const response = await firstValueFrom(this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body));
+  
+      if (response.access_token) {
+        localStorage.setItem('access_token', response.access_token);
+      }
+  
+      const usuarioInfo = await this.getUsuarioInfo(body.email);
+  
+      this.router.navigate(['/dashboard'], {
+        queryParams: {
+          nome: usuarioInfo.nome,
+          profissao: usuarioInfo.profissao,
+          empresa: usuarioInfo.empresa
+        }
+      });
+    } catch (error) {
+      ErrorMessages.loginErrorMessage();
+    }
+  }
+
+  private async getUsuarioInfo(email: string): Promise<UsuarioInfoDTO> {
+      const response = await firstValueFrom(this.httpClient.post<UsuarioInfoDTO>(`${this.URL}/usuarios/info`, { email: email }));
+
+      const nome = response.nome;
+      const profissao = response.profissao;
+      const empresa = response.empresa;
+
+      return { nome, profissao, empresa };
   }
 }
