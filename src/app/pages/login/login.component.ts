@@ -1,6 +1,6 @@
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { UsuarioInfoDTO } from './usuarioInfoDTO';
+import { UsuarioInfoDTO } from './UsuarioInfoDTO';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
