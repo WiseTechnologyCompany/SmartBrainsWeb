@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -6,47 +6,17 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
-export interface UserData {
+export interface movimentacaoDTO {
   id: string;
-  name: string;
-  progress: string;
-  fruit: string;
+  tipoMovimentacao: string;
+  descricao: string;
+  valor: string;
+  dataCriacao: string;
 }
-
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -57,20 +27,105 @@ const NAMES: string[] = [
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    MatDatepickerModule
   ],
+  providers: [provideNativeDateAdapter()],
 })
-export class DashboardComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
+export class DashboardComponent implements AfterViewInit, OnInit {
+
+  ngOnInit() {
+    const dadosFicticios: movimentacaoDTO[] = [
+      {
+        id: '1',
+        tipoMovimentacao: 'Entrada',
+        descricao: 'Pagamento cliente A',
+        valor: '1.200,00',
+        dataCriacao: '2025-04-01'
+      },
+      {
+        id: '2',
+        tipoMovimentacao: 'Saída',
+        descricao: 'Compra de materiais',
+        valor: '450,00',
+        dataCriacao: '2025-04-02'
+      },
+      {
+        id: '3',
+        tipoMovimentacao: 'Entrada',
+        descricao: 'Recebimento projeto B',
+        valor: '3.000,00',
+        dataCriacao: '2025-04-03'
+      },
+      {
+        id: '4',
+        tipoMovimentacao: 'Saída',
+        descricao: 'Pagamento de aluguel',
+        valor: '2.000,00',
+        dataCriacao: '2025-04-05'
+      },
+      {
+        id: '5',
+        tipoMovimentacao: 'Entrada',
+        descricao: 'Venda de produto X',
+        valor: '50,00',
+        dataCriacao: '2025-04-06'
+      },
+      {
+        id: '6',
+        tipoMovimentacao: 'Saída',
+        descricao: 'Manutenção de equipamentos',
+        valor: '680,00',
+        dataCriacao: '2025-04-07'
+      },
+      {
+        id: '7',
+        tipoMovimentacao: 'Saída',
+        descricao: 'Manutenção de equipamentos',
+        valor: '680,00',
+        dataCriacao: '2025-04-07'
+      },
+      {
+        id: '8',
+        tipoMovimentacao: 'Entrada',
+        descricao: 'Recebimento projeto C',
+        valor: '1.500,00',
+        dataCriacao: '2025-04-08'
+      },
+      {
+        id: '9',
+        tipoMovimentacao: 'Saída',
+        descricao: 'Compra de software Y',
+        valor: '1.200,00',
+        dataCriacao: '2025-04-09'
+      },
+      {
+        id: '10',
+        tipoMovimentacao: 'Entrada',
+        descricao: 'Pagamento cliente D',
+        valor: '2.800,00',
+        dataCriacao: '2025-04-10'
+      },
+      {
+        id: '11',
+        tipoMovimentacao: 'Saída',
+        descricao: 'Despesas com marketing',
+        valor: '1.000,00',
+        dataCriacao: '2025-04-11'
+      }
+    ];
+  
+    this.dataSource = new MatTableDataSource(dadosFicticios);
+  }
+
+  displayedColumns: string[] = ['id', 'tipoMovimentacao', 'descricao', 'valor', 'dataCriacao'];
+  dataSource!: MatTableDataSource<movimentacaoDTO>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private readonly route: ActivatedRoute) {
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-    this.dataSource = new MatTableDataSource(users);
-  }
+  constructor(private readonly route: ActivatedRoute) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -95,19 +150,4 @@ export class DashboardComponent implements AfterViewInit {
     const empresa = this.route.snapshot.queryParamMap.get('empresa') ?? '';
     return `${profissao} - ${empresa}`;
   }
-}
-
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.floor(Math.random() * NAMES.length)] +
-    ' ' +
-    NAMES[Math.floor(Math.random() * NAMES.length)].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.floor(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.floor(Math.random() * FRUITS.length)],
-  };
 }

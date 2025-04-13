@@ -4,6 +4,7 @@ import { LoadingService } from './pages/loading/LoadingService';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,9 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline', hideRequiredMarker: true },
     },
+    {
+      provide: MAT_DATE_LOCALE, useValue: 'pt-BR',
+    }
   ],
 })
 export class AppComponent implements OnInit {
