@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 export interface movimentacaoDTO {
   id: string;
@@ -29,7 +30,9 @@ export interface movimentacaoDTO {
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    CommonModule,
+    RouterModule
   ],
   providers: [provideNativeDateAdapter()],
 })

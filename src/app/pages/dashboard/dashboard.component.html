@@ -7,7 +7,7 @@
         alt="Logo da Wise Finances"/>
     </div>
 
-    <div class="sidebar-icon" title="Home">
+    <div class="sidebar-icon" title="Dashboard" [routerLink]="['/dashboard']">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="26"
@@ -19,7 +19,7 @@
       </svg>
     </div>
 
-    <div class="sidebar-icon" title="Adicionar">
+    <div class="sidebar-icon" title="Adicionar" [routerLink]="['/adicionar']">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="26"
@@ -202,7 +202,7 @@
           </mat-date-range-picker>
         </mat-form-field>
 
-        <button mat-flat-button class="btnAdicionar" title="Adicionar">
+        <button mat-flat-button class="btnAdicionar" title="Adicionar" [routerLink]="['/adicionar']">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
