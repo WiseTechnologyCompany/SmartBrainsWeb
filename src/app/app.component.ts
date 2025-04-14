@@ -1,10 +1,9 @@
-import { RouterOutlet } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoadingService } from './pages/loading/LoadingService';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,17 +24,15 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 export class AppComponent implements OnInit {
   title = 'SmartBrainsWeb';
 
-  constructor(private router: Router, private loadingService: LoadingService) {}
+  constructor(private readonly router: Router, private readonly loadingService: LoadingService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.loadingService.show();
-      } else if (
-        event instanceof NavigationEnd ||
-        event instanceof NavigationCancel ||
-        event instanceof NavigationError
-      ) {
+      } 
+      
+      else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
         const url = this.router.url;
 
         const rotasComDelay = ['/dashboard'];
