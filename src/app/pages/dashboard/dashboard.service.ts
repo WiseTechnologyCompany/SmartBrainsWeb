@@ -20,7 +20,7 @@ export class DashboardService {
   constructor(private httpClient: HttpClient) {}
 
   getEmail(): string {
-    return localStorage.getItem('email') || '';
+    return sessionStorage.getItem('email') || '';
   }
 
   getUserTransactions(): Observable<MovimentacaoDTO[]> {

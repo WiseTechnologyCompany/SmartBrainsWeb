@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
   getToken(): string | null {
-    return localStorage.getItem(this.access_token);
+    return sessionStorage.getItem(this.access_token);
   }
 
   checkToken(): Observable<boolean> {
@@ -37,6 +37,6 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.access_token);
+    sessionStorage.removeItem(this.access_token);
   }
 }

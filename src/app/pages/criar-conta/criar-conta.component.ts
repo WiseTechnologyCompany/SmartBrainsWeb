@@ -1,15 +1,13 @@
-import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { CriarContaService } from './criar-conta.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
-import { environment } from '../../environments/Environment';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GlobalFormats } from '../../utils/formats/GlobalFormats';
 import { GlobalValidators } from '../../utils/validators/GlobalValidators';
@@ -36,8 +34,6 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, F
   providers: [provideNgxMask()],
 })
 export class CriarContaComponent {
-  private readonly URL = `${environment.API_URL}`;
-
   isEditable = true;
   hidePassword = signal(true);
   hideConfirmPassword = signal(true);
@@ -47,8 +43,8 @@ export class CriarContaComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly httpClient: HttpClient,
-    private readonly _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder,
+    private readonly criarContaService: CriarContaService
   ) {
     this.formGroupDadosPessoais = this._formBuilder.group({
       nome: ['', Validators.required],
@@ -83,6 +79,7 @@ export class CriarContaComponent {
     if (email?.hasError('emailJaCadastrado')) {
       return 'Este e-mail já está cadastrado.';
     }
+
     return '';
   }
 
@@ -125,12 +122,28 @@ export class CriarContaComponent {
 
   async sendUserData() {
     const body = this.createBodyUser();
-    await this.saveUserRequest(body);
+    await this.criarContaService.saveUser(body);
+
+    this.router.navigate(['/dashboard'], {
+      queryParams: {
+        nome: body.nome,
+        profissao: body.profissao,
+        empresa: body.empresa,
+      },
+    });
   }
 
   async sendLoginData() {
     const body = this.createBodyLogin();
-    await this.saveLoginRequest(body);
+    await this.criarContaService.saveLogin(body);
+    const token = await this.criarContaService.getToken(body);
+
+    sessionStorage.setItem('email', body.email);
+    sessionStorage.setItem('access_token', token);
+
+    setTimeout(async () => {
+      await this.sendUserData();
+    }, 1000);
   }
 
   private createBodyUser() {
@@ -156,49 +169,15 @@ export class CriarContaComponent {
     };
   }
 
-  private async getTokenRequest(body: any) {
-    const response = await firstValueFrom(this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body));
-
-    localStorage.setItem('access_token', response.access_token);
-    localStorage.setItem('email', body.email);
-
-    setTimeout(async () => {
-      await this.sendUserData();
-    }, 1000);
-  }
-
-  private async saveUserRequest(body: any) {
-    await firstValueFrom(this.httpClient.post(`${this.URL}/usuarios`, body));
-
-    this.router.navigate(['/dashboard'], {
-      queryParams: {
-        nome: body.nome,
-        profissao: body.profissao,
-        empresa: body.empresa,
-      },
-    });
-  }
-
-  private async saveLoginRequest(body: any) {
-    await firstValueFrom(this.httpClient.post(`${this.URL}/auth/save`, body));
-    await this.getTokenRequest(body);
-  }
-
   async verificarEmailExistente() {
     const emailControl = this.formGroupDadosPessoais.get('email');
+
     if (emailControl && emailControl.valid) {
-      await this.checkEmail(emailControl.value);
-    }
-  }
-  
-  private async checkEmail(email: string): Promise<boolean> {
-    const response = await firstValueFrom(this.httpClient.post<{ emailAlreadyExists: boolean }>( `${this.URL}/auth/check/email`, { email }));
+      const existe = await this.criarContaService.checkEmail(emailControl.value);
 
-    if (response.emailAlreadyExists) {
-      this.formGroupDadosPessoais.get('email')?.setErrors({ emailJaCadastrado: true });
-      return true;
+      if (existe) {
+        emailControl.setErrors({ emailJaCadastrado: true });
+      }
     }
-
-    return false;
   }
 }
