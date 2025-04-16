@@ -34,6 +34,8 @@
 * ![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=WiseFinances_SmartBrainsWeb&metric=code_smells)
 
 * ![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=WiseFinances_SmartBrainsWeb&metric=ncloc)
+
+* [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=WiseFinances_SmartBrainsWeb&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=WiseFinances_SmartBrainsWeb)
   
 
  <br> 
