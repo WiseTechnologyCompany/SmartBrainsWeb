@@ -11,7 +11,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DashboardService, MovimentacaoDTO } from './dashboard.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
