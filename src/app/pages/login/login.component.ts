@@ -80,7 +80,8 @@ export class LoginComponent {
     try {
       const response = await firstValueFrom(this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body));
   
-      if (response.access_token) {
+      if (response) {
+        localStorage.setItem('email', body.email);
         localStorage.setItem('access_token', response.access_token);
       }
   

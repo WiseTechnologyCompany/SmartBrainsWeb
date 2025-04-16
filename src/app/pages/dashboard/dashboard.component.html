@@ -180,18 +180,18 @@
     </div>
 
     <div class="table">
-      <div class="header-actions">
+      <div class="header-options">
         <mat-form-field appearance="outline" class="input-options">
           <mat-label>Pesquisar</mat-label>
           <mat-icon matPrefix>search</mat-icon>
           <input matInput (keyup)="applyFilter($event)" #input />
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="input-grande">
-          <mat-label>Selecione um Período</mat-label>
+        <mat-form-field appearance="outline" class="input-options">
+          <mat-label (click)="rangePicker.open()">Selecione um Período</mat-label>
           <mat-date-range-input [rangePicker]="rangePicker">
-            <input matStartDate placeholder="Data Início" />
-            <input matEndDate placeholder="Data Fim" />
+            <input matStartDate placeholder="Data Início"/>
+            <input matEndDate placeholder="Data Fim"/>
           </mat-date-range-input>
           <mat-datepicker-toggle matPrefix [for]="rangePicker"></mat-datepicker-toggle>
           <mat-date-range-picker touchUi #rangePicker>
@@ -247,16 +247,13 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="5">
-              Nenhum registro foi encontrado com o valor: "{{ input.value }}"
+            <td class="mat-cell" colspan="5" style="text-align: center; padding: 24px;">
+              <span style="margin-left: 8px;">Nenhum registro foi encontrado no momento, verifique os filtros ou adicione novos registros!</span>
             </td>
           </tr>
         </table>
 
-        <mat-paginator
-          [pageSizeOptions]="[8, 15, 25, 100]"
-          aria-label="Select page of users"
-        ></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[8, 15, 25, 100]"></mat-paginator>
       </div>
     </div>
   </div>

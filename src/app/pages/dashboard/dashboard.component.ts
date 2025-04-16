@@ -1,23 +1,17 @@
-import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DashboardService, MovimentacaoDTO } from './dashboard.service';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
-export interface movimentacaoDTO {
-  id: string;
-  tipoMovimentacao: string;
-  descricao: string;
-  valor: string;
-  dataCriacao: string;
-}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -36,103 +30,22 @@ export interface movimentacaoDTO {
   ],
   providers: [provideNativeDateAdapter()],
 })
-export class DashboardComponent implements AfterViewInit, OnInit {
-
-  ngOnInit() {
-    const dadosFicticios: movimentacaoDTO[] = [
-      {
-        id: '1',
-        tipoMovimentacao: 'Entrada',
-        descricao: 'Pagamento cliente A',
-        valor: '1.200,00',
-        dataCriacao: '2025-04-01'
-      },
-      {
-        id: '2',
-        tipoMovimentacao: 'Saída',
-        descricao: 'Compra de materiais',
-        valor: '450,00',
-        dataCriacao: '2025-04-02'
-      },
-      {
-        id: '3',
-        tipoMovimentacao: 'Entrada',
-        descricao: 'Recebimento projeto B',
-        valor: '3.000,00',
-        dataCriacao: '2025-04-03'
-      },
-      {
-        id: '4',
-        tipoMovimentacao: 'Saída',
-        descricao: 'Pagamento de aluguel',
-        valor: '2.000,00',
-        dataCriacao: '2025-04-05'
-      },
-      {
-        id: '5',
-        tipoMovimentacao: 'Entrada',
-        descricao: 'Venda de produto X',
-        valor: '50,00',
-        dataCriacao: '2025-04-06'
-      },
-      {
-        id: '6',
-        tipoMovimentacao: 'Saída',
-        descricao: 'Manutenção de equipamentos',
-        valor: '680,00',
-        dataCriacao: '2025-04-07'
-      },
-      {
-        id: '7',
-        tipoMovimentacao: 'Saída',
-        descricao: 'Manutenção de equipamentos',
-        valor: '680,00',
-        dataCriacao: '2025-04-07'
-      },
-      {
-        id: '8',
-        tipoMovimentacao: 'Entrada',
-        descricao: 'Recebimento projeto C',
-        valor: '1.500,00',
-        dataCriacao: '2025-04-08'
-      },
-      {
-        id: '9',
-        tipoMovimentacao: 'Saída',
-        descricao: 'Compra de software Y',
-        valor: '1.200,00',
-        dataCriacao: '2025-04-09'
-      },
-      {
-        id: '10',
-        tipoMovimentacao: 'Entrada',
-        descricao: 'Pagamento cliente D',
-        valor: '2.800,00',
-        dataCriacao: '2025-04-10'
-      },
-      {
-        id: '11',
-        tipoMovimentacao: 'Saída',
-        descricao: 'Despesas com marketing',
-        valor: '1.000,00',
-        dataCriacao: '2025-04-11'
-      }
-    ];
-  
-    this.dataSource = new MatTableDataSource(dadosFicticios);
-  }
+export class DashboardComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'tipoMovimentacao', 'descricao', 'valor', 'dataCriacao'];
-  dataSource!: MatTableDataSource<movimentacaoDTO>;
+  dataSource!: MatTableDataSource<MovimentacaoDTO>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly route: ActivatedRoute) {}
+  constructor(private readonly route: ActivatedRoute, private dashboardService: DashboardService) {}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngOnInit() {
+    this.dashboardService.getUserTransactions().subscribe((movimentacaoDTO: MovimentacaoDTO[]) => {
+      this.dataSource = new MatTableDataSource(movimentacaoDTO);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   applyFilter(event: Event) {

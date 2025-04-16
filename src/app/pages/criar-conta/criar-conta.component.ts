@@ -160,6 +160,7 @@ export class CriarContaComponent {
     const response = await firstValueFrom(this.httpClient.post<{ access_token: string }>(`${this.URL}/auth`, body));
 
     localStorage.setItem('access_token', response.access_token);
+    localStorage.setItem('email', body.email);
 
     setTimeout(async () => {
       await this.sendUserData();
