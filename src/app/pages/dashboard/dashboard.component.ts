@@ -8,7 +8,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DashboardService, MovimentacaoDTO } from './dashboard.service';
+import { DashboardService, MovimentacaoDTO, TotalTransactionsDTO } from './dashboard.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 @Component({
@@ -31,6 +31,11 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 })
 export class DashboardComponent implements OnInit {
 
+  receita: number = 0;
+  entrada: number = 0;
+  gastosFixos: number = 0;
+  despesas: number = 0;
+
   displayedColumns: string[] = ['id', 'tipoMovimentacao', 'descricao', 'valor', 'dataCriacao'];
   dataSource!: MatTableDataSource<MovimentacaoDTO>;
 
@@ -40,10 +45,16 @@ export class DashboardComponent implements OnInit {
   constructor(private readonly route: ActivatedRoute, private dashboardService: DashboardService) {}
 
   ngOnInit() {
-    this.dashboardService.getUserTransactions().subscribe((movimentacaoDTO: MovimentacaoDTO[]) => {
+    this.dashboardService.getAllUserTransactions().subscribe((movimentacaoDTO: MovimentacaoDTO[]) => {
       this.dataSource = new MatTableDataSource(movimentacaoDTO);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    });
+
+    this.dashboardService.getUserTotalTransactions().subscribe((totalTransactionsDTO: TotalTransactionsDTO) => {
+      this.entrada = totalTransactionsDTO.totalEntrada;
+      this.gastosFixos = totalTransactionsDTO.totalGastosFixos;
+      this.despesas = totalTransactionsDTO.totalDespesas;
     });
   }
 
@@ -64,5 +75,33 @@ export class DashboardComponent implements OnInit {
     const profissao = this.route.snapshot.queryParamMap.get('profissao') ?? '';
     const empresa = this.route.snapshot.queryParamMap.get('empresa') ?? '';
     return `${profissao} - ${empresa}`;
+  }
+
+  getReceita() { 
+    const totalSaida = this.gastosFixos + this.despesas;
+    
+    if (totalSaida > this.entrada) {
+      const resultado = ((this.entrada - totalSaida) / this.entrada) * 100;
+      return (resultado + 100).toFixed(2) + '%';
+    }
+ 
+    const resultado = this.receita = parseFloat(((this.entrada - totalSaida) / this.entrada * 100).toFixed(2));
+    return 100 - resultado + '%';
+  }
+
+  getTotalEntrada() {
+    return this.entrada.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  getTotalGastosFixos() {
+    return this.gastosFixos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  getTotalDespesas() {
+    return this.despesas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  showDate(dataInicio: string, dataFim: string) {
+    console.log(dataInicio + ' - ' + dataFim);
   }
 }

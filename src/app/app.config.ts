@@ -2,7 +2,7 @@ import { routes } from './app.routes';
 import { provideRouter } from '@angular/router';
 import { AuthInterceptor } from './auth/AuthInterceptor';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { MensagemTabela } from './pages/dashboard/mensagem.tabela';
+import { DashboardService } from './pages/dashboard/dashboard.service';
 import { LoadingInterceptor } from './pages/loading/LoadingInterceptor';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([AuthInterceptor, LoadingInterceptor])),
-    { provide: MatPaginatorIntl, useClass: MensagemTabela },
+    { provide: MatPaginatorIntl, useClass: DashboardService },
   ],
 };
