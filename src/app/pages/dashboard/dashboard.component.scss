@@ -294,3 +294,37 @@ tr.mat-row:hover {
 .mat-paginator {
   border-top: 1px solid #eaeaea;
 }
+
+.botoes {
+  display: flex;
+  justify-content: center;
+  padding: 8%;
+}
+
+.botao-editar {
+  width: 40px;
+  height: 40px;
+  margin-left: 30%;
+  background-color: #1976d2; 
+  color: white;
+}
+
+.botao-excluir {
+  width: 40px;
+  height: 40px;
+  margin-left: 10%;
+  background-color: #d32f2f;
+  color: white;
+}
+
+button.botao-editar.mat-fab {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+
+.botao-editar mat-icon,
+.botao-excluir mat-icon {
+  color: white !important;
+}
+
+

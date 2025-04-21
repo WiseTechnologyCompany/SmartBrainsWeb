@@ -36,7 +36,10 @@ export class DashboardComponent implements OnInit {
   gastosFixos: number = 0;
   despesas: number = 0;
 
-  displayedColumns: string[] = ['id', 'tipoMovimentacao', 'descricao', 'valor', 'dataCriacao'];
+  dataFim: string = '';
+  dataInicio: string = '';
+
+  displayedColumns: string[] = ['id', 'tipoMovimentacao', 'descricao', 'valor', 'dataCriacao', 'botoes'];
   dataSource!: MatTableDataSource<MovimentacaoDTO>;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -101,7 +104,16 @@ export class DashboardComponent implements OnInit {
     return this.despesas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  showDate(dataInicio: string, dataFim: string) {
-    console.log(dataInicio + ' - ' + dataFim);
+  getDate() {
+    if (!this.dataInicio && !this.dataFim) {
+      return '';
+    }
+
+    return '| ' + this.dataInicio + ' - ' + this.dataFim;
+  }
+
+  saveDate(dataInicio: string, dataFim: string) {
+    this.dataInicio = dataInicio;
+    this.dataFim = dataFim;
   }
 }
