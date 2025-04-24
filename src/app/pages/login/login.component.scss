@@ -33,6 +33,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
 }
 
 .email-container, mat-form-field {
+  font-size: 17px;
   width: 100%;
   display: flex;
   padding-top: 2%;
@@ -42,6 +43,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
 }
 
 .senha-container {
+  font-size: 17px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -120,4 +122,12 @@ mat-hint a:hover {
   color: $cor-primaria;
   background-color: $cor-fundo;
   padding-bottom: 0.5%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #000 !important;
+  transition: background-color 1000s ease-in-out 0s;
 }
