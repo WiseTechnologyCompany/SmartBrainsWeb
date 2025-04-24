@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,9 +9,10 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DashboardService, MovimentacaoDTO, TotalTransactionsDTO } from './dashboard.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { DashboardService, MovimentacaoDTO, TotalTransactionsDTO } from './dashboard.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -25,7 +27,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatButtonModule,
     MatDatepickerModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule
   ],
   providers: [provideNativeDateAdapter()],
 })

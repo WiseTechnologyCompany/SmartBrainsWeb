@@ -106,6 +106,36 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   color: $cor-primaria;
 }
 
+.menu-item {
+  display: flex;
+  align-items: center;
+  background-color: white !important;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+  color: black !important;
+  background-color: white !important;
+}
+
+.menu-icon {
+  font-size: 19px;
+  vertical-align: middle;
+}
+
+.menu-opcoes {
+  display: flex;
+  align-items: center;
+  padding-top: 8%;
+}
+
+.sair {
+  color: red !important;
+}
+
+.sair .menu-icon {
+  color: red !important;
+}
+
 .user-role {
   color: #6c757d;
   font-size: 13px;

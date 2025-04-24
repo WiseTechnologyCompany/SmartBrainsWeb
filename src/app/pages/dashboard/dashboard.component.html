@@ -77,6 +77,7 @@
     <div class="top-nav">
       <div class="user-avatar">
         <svg
+          [matMenuTriggerFor]="menu"
           xmlns="http://www.w3.org/2000/svg"
           width="35"
           height="35"
@@ -91,6 +92,18 @@
         <p class="user-name">{{ getName() }}</p>
         <p class="user-role">{{ getCompany() }}</p>
       </div>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="menu-item">
+          <mat-icon class="menu-icon">drive_file_rename_outline</mat-icon>
+          <span class="menu-opcoes">Editar</span>
+        </button>
+      
+        <button mat-menu-item class="menu-item sair">
+          <mat-icon class="menu-icon">logout</mat-icon>
+          <span class="menu-opcoes">Sair</span>
+        </button>
+      </mat-menu>       
     </div>
 
     <div class="breadcrumb-container">
