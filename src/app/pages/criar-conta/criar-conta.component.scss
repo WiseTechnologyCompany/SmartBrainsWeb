@@ -143,3 +143,11 @@ mat-form-field {
   background-color: $cor-fundo;
   padding-bottom: 0.5%;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #000 !important;
+  transition: background-color 1000s ease-in-out 0s;
+}
