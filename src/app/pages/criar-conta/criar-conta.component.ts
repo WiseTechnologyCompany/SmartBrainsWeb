@@ -14,10 +14,10 @@ import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'app-criar-conta',
   templateUrl: './criar-conta.component.html',
   styleUrl: './criar-conta.component.scss',
-  standalone: true,
   imports: [
     CommonModule,
     RouterModule,

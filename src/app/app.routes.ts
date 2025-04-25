@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/AuthGuard';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AdicionarComponent } from './pages/adicionar/adicionar.component';
+import { AdicionarComponent } from './pages/adicionar-transacao/adicionar-transacao.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CriarContaComponent } from './pages/criar-conta/criar-conta.component';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';

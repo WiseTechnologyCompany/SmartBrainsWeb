@@ -10,9 +10,11 @@ import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -23,7 +25,6 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
     FormsModule,
     ReactiveFormsModule
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   hide = true;

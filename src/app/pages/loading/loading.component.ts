@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { LoadingService } from './LoadingService';
 
 @Component({
+  standalone: true,
   selector: 'app-loading',
-  imports: [CommonModule],
   templateUrl: './loading.component.html',
-  styleUrl: './loading.component.scss'
+  styleUrl: './loading.component.scss',
+  imports: [CommonModule],
 })
 export class LoadingComponent {
 

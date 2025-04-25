@@ -36,7 +36,6 @@
                 matInput
                 formControlName="dataNascimento"
                 mask="00/00/0000"/>
-              <mat-hint>DD/MM/YYYY</mat-hint>
               <mat-icon matPrefix>calendar_month</mat-icon>
               <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')">
                 Data de Nascimento é obrigatório!

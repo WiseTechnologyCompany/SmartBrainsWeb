@@ -9,9 +9,11 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
+  standalone: true,
   selector: 'app-esqueceu-senha',
   templateUrl: './esqueceu-senha.component.html',
   styleUrl: './esqueceu-senha.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -20,13 +22,6 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/mat
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline', hideRequiredMarker: true },
-    },
   ],
 })
 

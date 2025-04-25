@@ -131,33 +131,126 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label for="description" class="form-label">Descrição</label>
-          <input type="text" id="description" name="description" class="form-input" placeholder="Ex: Salário, Aluguel, etc." />
+          <mat-form-field appearance="outline">
+            <mat-label>Descrição</mat-label>
+            <input matInput placeholder="Ex: Salário, Aluguel, etc.">
+          </mat-form-field>
         </div>
 
         <div class="form-group">
-          <label for="amount" class="form-label">Valor (R$)</label>
-          <input type="number" id="amount" name="amount" class="form-input" placeholder="0,00" />
+          <mat-form-field appearance="outline">
+            <mat-label>Valor (R$)</mat-label>
+            <input matInput placeholder="R$ 0,00">
+          </mat-form-field>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="date" class="form-label">Data</label>
-          <input type="date" id="date" name="date" class="form-input" />
+          <mat-form-field appearance="outline">
+            <mat-label>Data</mat-label>
+            <input matInput mask="00/00/0000" [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
         </div>
 
         <div class="form-group">
-          <label for="account" class="form-label">Conta</label>
-          <select id="account" name="account" class="form-select" >
-            <option value="" disabled selected>Selecione uma conta</option>
-            <option value="nubank">Nubank</option>
-            <option value="bradesco">Bradesco</option>
-            <option value="santander">Santander</option>
-            <option value="cash">Dinheiro</option>
-          </select>
+          <mat-form-field appearance="outline">
+            <mat-label>Observação</mat-label>
+            <input matInput placeholder="Detalhes sobre a transação">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <h3 class="form-section-title">Categorias</h3>
+
+      <div class="category-icons">
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-salary" value="salary">
+          <label for="cat-salary" class="category-label">
+            <span class="category-icon">💼</span>
+            <span class="category-name">Salário</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-food" value="food">
+          <label for="cat-food" class="category-label">
+            <span class="category-icon">🍔</span>
+            <span class="category-name">Alimentação</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-transport" value="transport">
+          <label for="cat-transport" class="category-label">
+            <span class="category-icon">🚗</span>
+            <span class="category-name">Transporte</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-home" value="home">
+          <label for="cat-home" class="category-label">
+            <span class="category-icon">🏠</span>
+            <span class="category-name">Moradia</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-entertainment" value="entertainment">
+          <label for="cat-entertainment" class="category-label">
+            <span class="category-icon">🎬</span>
+            <span class="category-name">Lazer</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-health" value="health">
+          <label for="cat-health" class="category-label">
+            <span class="category-icon">💊</span>
+            <span class="category-name">Saúde</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-education" value="education">
+          <label for="cat-education" class="category-label">
+            <span class="category-icon">📚</span>
+            <span class="category-name">Educação</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-shopping" value="shopping">
+          <label for="cat-shopping" class="category-label">
+            <span class="category-icon">🛍️</span>
+            <span class="category-name">Compras</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-bills" value="bills">
+          <label for="cat-bills" class="category-label">
+            <span class="category-icon">📄</span>
+            <span class="category-name">Contas</span>
+          </label>
+        </div>
+
+        <div class="category-option">
+          <input type="radio" name="category" id="cat-other" value="other">
+          <label for="cat-other" class="category-label">
+            <span class="category-icon">📌</span>
+            <span class="category-name">Outros</span>
+          </label>
         </div>
       </div>
     </form>
+
+    <div class="btn-container">
+      <button class="btn-voltar" mat-flat-button [routerLink]="['/dashboard']">Voltar</button>
+      <button class="btn-salvar" mat-flat-button>Salvar</button>
+    </div>
   </div>
 </div>
