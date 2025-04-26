@@ -99,10 +99,10 @@
           <span class="menu-opcoes">Editar</span>
         </button>
       
-        <button mat-menu-item class="menu-item sair">
+        <button mat-menu-item class="menu-item sair" (click)="logout()">
           <mat-icon class="menu-icon">logout</mat-icon>
           <span class="menu-opcoes">Sair</span>
-        </button>
+        </button>        
       </mat-menu>       
     </div>
 
@@ -311,7 +311,7 @@
           </tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[6, 15, 25, 100]"></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[5, 15, 25, 100]"></mat-paginator>
       </div>
     </div>
   </div>

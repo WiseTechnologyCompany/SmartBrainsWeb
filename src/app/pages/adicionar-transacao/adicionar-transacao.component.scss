@@ -10,6 +10,8 @@ $cor-despesa: #ef4444;
 $cor-despesa-bg: rgba(239, 68, 68, 0.1); 
 $cor-categoria: #1e3a8a; 
 $cor-categoria-bg: #dbeafe;
+$cor-fixo: #f97316;
+$cor-fixo-bg: #fff7ed;
 
 .sidebar {
   align-items: center;
@@ -208,6 +210,13 @@ $cor-categoria-bg: #dbeafe;
   border-color: $cor-despesa;
   background-color: $cor-despesa-bg;
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.4);
+  transform: scale(1.02);
+}
+
+.type-option input[type="radio"]:checked + .type-label.fixed {
+  border-color: $cor-fixo;
+  background-color: $cor-fixo-bg;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.4);
   transform: scale(1.02);
 }
 

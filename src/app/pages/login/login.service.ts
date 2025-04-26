@@ -4,12 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/Environment';
 import { ErrorMessages } from '../../utils/messages/ErrorMessages';
 import { Injectable } from '@angular/core';
-
 export interface UsuarioInfoDTO {
   nome: string;
   profissao: string;
   empresa: string;
 }
+
 @Injectable({
     providedIn: 'root'
   })
@@ -47,6 +47,10 @@ export class LoginService {
     const nome = response.nome;
     const profissao = response.profissao;
     const empresa = response.empresa;
+
+    sessionStorage.setItem('nome', nome);
+    sessionStorage.setItem('profissao', profissao);
+    sessionStorage.setItem('empresa', empresa);
 
     return { nome, profissao, empresa };
   }

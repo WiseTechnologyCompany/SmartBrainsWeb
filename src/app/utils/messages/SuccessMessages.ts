@@ -43,4 +43,25 @@ export class SuccessMessages {
       },
     });
   }
+
+  // Transação
+  static saveNewTransactionSuccessMessage() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Sucesso!',
+      text: 'Transação cadastrada com sucesso!',
+      toast: true,
+      position: 'top-end',
+      background: '#dff0d8',
+      color: '#000000',
+      width: '30%',
+      showConfirmButton: false,
+      timer: 4750,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+  }
 }
