@@ -1,5 +1,5 @@
 $cor-fundo: #f8f9f9;
-$cor-primaria: #76A7B9;
+$cor-primaria: #76a7b9;
 $cor-texto-preto: #000000;
 $cor-fundo-branco: #ffffff;
 $cor-texto-branco: #ffffff;
@@ -53,7 +53,8 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   font-weight: 400;
 }
 
-.email-container, mat-form-field {
+.email-container,
+mat-form-field {
   width: 100%;
   display: flex;
   padding-top: 2.5%;

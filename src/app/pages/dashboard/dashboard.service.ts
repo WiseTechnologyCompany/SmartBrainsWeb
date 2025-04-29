@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/Environment';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+
 export interface MovimentacaoDTO {
   id: number;
   tipoMovimentacao: string;

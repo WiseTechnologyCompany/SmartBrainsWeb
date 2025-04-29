@@ -1,23 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { CriarContaService } from './criar-conta.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { EditarUsuarioService } from './editar-usuario.service';
 import { GlobalFormats } from '../../utils/formats/GlobalFormats';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { GlobalValidators } from '../../utils/validators/GlobalValidators';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({
   standalone: true,
-  selector: 'app-criar-conta',
-  templateUrl: './criar-conta.component.html',
-  styleUrl: './criar-conta.component.scss',
+  selector: 'app-editar-usuario',
+  templateUrl: './editar-usuario.component.html',
+  styleUrl: './editar-usuario.component.scss',
   imports: [
     CommonModule,
     RouterModule,
@@ -33,18 +33,19 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, F
   ],
   providers: [provideNgxMask()],
 })
-export class CriarContaComponent {
+export class EditarUsuarioComponent implements OnInit {
   isEditable = true;
-  hidePassword = signal(true);
-  hideConfirmPassword = signal(true);
-
   formGroupDadosPessoais: FormGroup;
-  formGroupLogin: FormGroup;
+
+  ngOnInit(): void {
+    const usuarioDTO = this.editarUsuarioService.getUsuario();
+    console.log('UsuarioDTO: ', usuarioDTO);
+  }
 
   constructor(
     private readonly router: Router,
     private readonly _formBuilder: FormBuilder,
-    private readonly criarContaService: CriarContaService
+    private readonly editarUsuarioService: EditarUsuarioService
   ) {
     this.formGroupDadosPessoais = this._formBuilder.group({
       nome: ['', Validators.required],
@@ -56,12 +57,6 @@ export class CriarContaComponent {
       empresa: ['', Validators.required],
       estadoCivil: ['', Validators.required],
       email: ['', [Validators.required, GlobalValidators.emailValidator]],
-    });
-
-    this.formGroupLogin = this._formBuilder.group({
-      email: new FormControl({ value: '', disabled: true }, { nonNullable: true }),
-      senha: ['', [Validators.required, Validators.minLength(10), GlobalValidators.senhaForteValidator]],
-      confirmarSenha: ['', Validators.required],
     });
   }
 
@@ -83,16 +78,6 @@ export class CriarContaComponent {
     return '';
   }
 
-  clickEventPassword(event: MouseEvent) {
-    this.hidePassword.set(!this.hidePassword());
-    event.stopPropagation();
-  }
-
-  clickEventConfirmPassword(event: MouseEvent) {
-    this.hideConfirmPassword.set(!this.hideConfirmPassword());
-    event.stopPropagation();
-  }
-
   verificarFormGroupDadosPessoais() {
     const emailControl = this.formGroupDadosPessoais.get('email');
 
@@ -103,45 +88,6 @@ export class CriarContaComponent {
     }
 
     this.formGroupDadosPessoais.markAllAsTouched();
-    this.formGroupLogin.get('email')?.setValue(emailControl?.value);
-  }
-
-  verificarFormGroupLogin() {
-    this.formGroupLogin.markAllAsTouched();
-
-    const senha = this.formGroupLogin.get('senha')?.value;
-    const confirmarSenha = this.formGroupLogin.get('confirmarSenha')?.value;
-
-    if (senha !== confirmarSenha) {
-      this.formGroupLogin.get('confirmarSenha')?.setErrors({ senhaDiferente: true });
-      return;
-    }
-
-    this.sendLoginData();
-  }
-
-  async sendUserData() {
-    const body = this.createBodyUser();
-    await this.criarContaService.saveUser(body);
-
-    sessionStorage.setItem('nome', body.nome);
-    sessionStorage.setItem('profissao', body.profissao);
-    sessionStorage.setItem('empresa', body.empresa);
-
-    this.router.navigate(['/dashboard']);
-  }
-
-  async sendLoginData() {
-    const body = this.createBodyLogin();
-    await this.criarContaService.saveLogin(body);
-    const token = await this.criarContaService.getToken(body);
-
-    sessionStorage.setItem('email', body.email);
-    sessionStorage.setItem('access_token', token);
-
-    setTimeout(async () => {
-      await this.sendUserData();
-    }, 1000);
   }
 
   private createBodyUser() {
@@ -160,18 +106,13 @@ export class CriarContaComponent {
     };
   }
 
-  private createBodyLogin() {
-    return {
-      email: this.formGroupDadosPessoais.get('email')?.value ?? '',
-      password: this.formGroupLogin.get('senha')?.value,
-    };
-  }
-
   async verificarEmailExistente() {
     const emailControl = this.formGroupDadosPessoais.get('email');
 
     if (emailControl && emailControl.valid) {
-      const existe = await this.criarContaService.checkEmail(emailControl.value);
+      const existe = await this.editarUsuarioService.checkEmail(
+        emailControl.value
+      );
 
       if (existe) {
         emailControl.setErrors({ emailJaCadastrado: true });

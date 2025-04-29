@@ -143,9 +143,9 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
 
 .cards-container {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .card {
@@ -208,7 +208,8 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   border-radius: 0 0 16px 16px;
 }
 
-.receitas-card .card-value, .receitas-card .icon {
+.receitas-card .card-value,
+.receitas-card .icon {
   color: #3a7bd5;
 }
 
@@ -216,7 +217,8 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   background: linear-gradient(to top, #3a7bd5, transparent);
 }
 
-.despesas-card .card-value, .despesas-card .icon {
+.despesas-card .card-value,
+.despesas-card .icon {
   color: #e63946;
 }
 
@@ -224,7 +226,8 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   background: linear-gradient(to top, #e63946, transparent);
 }
 
-.entradas-card .card-value, .entradas-card .icon {
+.entradas-card .card-value,
+.entradas-card .icon {
   color: #2ecc71;
 }
 
@@ -232,7 +235,8 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   background: linear-gradient(to top, #2ecc71, transparent);
 }
 
-.lazer-card .card-value, .lazer-card .icon {
+.lazer-card .card-value,
+.lazer-card .icon {
   color: #9d4edd;
 }
 
@@ -260,14 +264,14 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
 }
 
 .input-options {
-  width: 300px; 
+  width: 300px;
 }
 
 .btnAdicionar {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 12px 18px; 
+  padding: 12px 18px;
   height: 50px;
   margin-left: 57.7%;
   background-color: $cor-primaria !important;
@@ -285,12 +289,15 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   margin: 0;
 }
 
-td, th, mat-header-cell, mat-paginator {
+td,
+th,
+mat-header-cell,
+mat-paginator {
   background-color: #ffffff !important;
   color: #333333;
 }
 
-th {  
+th {
   font-size: 15px;
   font-weight: 600;
   color: #444444;
@@ -313,7 +320,8 @@ mat-icon:hover {
   color: #3a7bd5;
 }
 
-mat-row, mat-cell {
+mat-row,
+mat-cell {
   background-color: #ffffff !important;
 }
 
@@ -335,7 +343,7 @@ tr.mat-row:hover {
   width: 40px;
   height: 40px;
   margin-left: 30%;
-  background-color: #1976d2; 
+  background-color: #1976d2;
   color: white;
 }
 
@@ -356,5 +364,3 @@ button.botao-editar.mat-fab {
 .botao-excluir mat-icon {
   color: white !important;
 }
-
-

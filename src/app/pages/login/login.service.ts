@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/Environment';
 import { ErrorMessages } from '../../utils/messages/ErrorMessages';
 import { Injectable } from '@angular/core';
+
 export interface UsuarioInfoDTO {
   nome: string;
   profissao: string;
@@ -12,7 +13,7 @@ export interface UsuarioInfoDTO {
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class LoginService {
   private readonly URL = `${environment.API_URL}`;
 
@@ -29,13 +30,7 @@ export class LoginService {
 
       const usuarioInfo = await this.getUsuarioInfo(body.email);
 
-      this.router.navigate(['/dashboard'], {
-        queryParams: {
-          nome: usuarioInfo.nome,
-          profissao: usuarioInfo.profissao,
-          empresa: usuarioInfo.empresa,
-        },
-      });
+      this.router.navigate(['/dashboard']);
     } catch (error) {
       ErrorMessages.loginErrorMessage();
     }

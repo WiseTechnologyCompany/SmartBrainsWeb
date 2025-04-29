@@ -90,16 +90,16 @@
     </div>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item class="menu-item">
+      <button mat-menu-item class="menu-item" [routerLink]="['/editar-usuario']">
         <mat-icon class="menu-icon">drive_file_rename_outline</mat-icon>
         <span class="menu-opcoes">Editar</span>
       </button>
-
+    
       <button mat-menu-item class="menu-item sair" (click)="logout()">
         <mat-icon class="menu-icon">logout</mat-icon>
         <span class="menu-opcoes">Sair</span>
-      </button>      
-    </mat-menu>
+      </button>        
+    </mat-menu>    
   </div>
 
   <div class="breadcrumb-container">

@@ -1,10 +1,7 @@
 <div class="container">
   <div class="sidebar">
     <div class="logo">
-      <img
-        class="logo-wisefinances"
-        src="wisefinances.png"
-        alt="Logo da Wise Finances"/>
+      <img class="logo-wisefinances" src="wisefinances.png" alt="Logo da Wise Finances"/>
     </div>
 
     <div class="sidebar-icon" title="Dashboard" [routerLink]="['/dashboard']">
@@ -94,7 +91,7 @@
       </div>
 
       <mat-menu #menu="matMenu">
-        <button mat-menu-item class="menu-item">
+        <button mat-menu-item class="menu-item" [routerLink]="['/editar-usuario']">
           <mat-icon class="menu-icon">drive_file_rename_outline</mat-icon>
           <span class="menu-opcoes">Editar</span>
         </button>

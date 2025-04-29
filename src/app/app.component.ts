@@ -12,13 +12,8 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
   standalone: true,
   imports: [RouterOutlet, LoadingComponent],
   providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline', hideRequiredMarker: true },
-    },
-    {
-      provide: MAT_DATE_LOCALE, useValue: 'pt-BR',
-    }
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline', hideRequiredMarker: true } },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
   ],
 })
 export class AppComponent implements OnInit {

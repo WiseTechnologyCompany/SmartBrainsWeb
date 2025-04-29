@@ -12,7 +12,7 @@ $cor-sombra: rgba(0, 0, 0, 0.3);
   background-color: $cor-fundo;
 }
 
-.criar-conta-container {
+.editar-usuario-container {
   width: 100rem;
   height: 50rem;
   border-radius: 1rem;
@@ -86,50 +86,6 @@ mat-form-field {
 }
 
 .btn-container button:hover {
-  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
-}
-
-.email-container,
-.senha-container,
-.confirmar-senha-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 3rem;
-}
-
-.btn-finalizar-container {
-  display: flex;
-  padding-top: 3%;
-  justify-content: center;
-  background-color: transparent;
-}
-
-.btn-finalizar {
-  font-size: 21px;
-  width: 30%;
-  font-weight: 600;
-  background-color: $cor-primaria;
-  color: $cor-texto-branco !important;
-}
-
-.btn-finalizar:hover {
-  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
-}
-
-.btn-voltar-container {
-  padding-top: 3%;
-}
-
-.btn-voltar-container button {
-  color: $cor-texto-branco;
-  background-color: $cor-primaria;
-  font-weight: 500;
-  font-size: 15px;
-  width: 7rem;
-}
-
-.btn-voltar-container button:hover {
   box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
 }
 

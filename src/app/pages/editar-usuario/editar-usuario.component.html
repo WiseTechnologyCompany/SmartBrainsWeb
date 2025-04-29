@@ -1,5 +1,5 @@
 <div class="leFadeInLeft main-container">
-  <div class="criar-conta-container">
+  <div class="editar-usuario-container">
     <div class="logo-container">
       <img class="logo-wisefinances" src="wisefinances.png" alt="Logo da Wise Finances" />
     </div>
@@ -13,8 +13,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Nome</mat-label>
               <input matInput formControlName="nome" />
-              <mat-error
-                *ngIf="formGroupDadosPessoais.get('nome')?.hasError('required')">
+              <mat-error *ngIf="formGroupDadosPessoais.get('nome')?.hasError('required')">
                 Nome é obrigatório!
               </mat-error>
             </mat-form-field>
@@ -29,10 +28,10 @@
 
             <mat-form-field appearance="outline">
               <mat-label>Data de Nascimento</mat-label>
-              <input
-                matInput
-                formControlName="dataNascimento"
-                mask="00/00/0000"/>
+              <input 
+              matInput 
+              formControlName="dataNascimento" 
+              mask="00/00/0000" />
               <mat-icon matPrefix>calendar_month</mat-icon>
               <mat-error *ngIf="formGroupDadosPessoais.get('dataNascimento')?.hasError('required')">
                 Data de Nascimento é obrigatório!
@@ -74,7 +73,7 @@
               <input
                 matInput
                 formControlName="telefone"
-                mask="(00) 00000-0000"/>
+                mask="(00) 00000-0000" />
               <mat-error *ngIf="formGroupDadosPessoais.get('telefone')?.hasError('required')">
                 Telefone é obrigatório!
               </mat-error>
@@ -107,108 +106,28 @@
                 <mat-option value="4">Divorciado</mat-option>
                 <mat-option value="5">Viúvo</mat-option>
               </mat-select>
-              <mat-error *ngIf="formGroupDadosPessoais.get('estadoCivil')?.hasError('required')">
+              <mat-error *ngIf=" formGroupDadosPessoais.get('estadoCivil')?.hasError('required')">
                 Selecione um Estado Civil!
               </mat-error>
             </mat-form-field>
           </div>
 
           <div class="btn-container">
-            <button mat-fab matStepperNext [routerLink]="['/login']">
+            <button mat-fab matStepperNext [routerLink]="['/dashboard']">
               CANCELAR
             </button>
             <button
               mat-fab
               matStepperNext
               (click)="verificarFormGroupDadosPessoais()">
-              PRÓXIMO
+              SALVAR
             </button>
           </div>
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="formGroupLogin" [editable]="isEditable">
-        <form [formGroup]="formGroupLogin">
-          <ng-template matStepLabel>Login</ng-template>
-
-          <div class="email-container">
-            <mat-form-field appearance="outline">
-              <mat-label>E-mail</mat-label>
-              <mat-icon matPrefix>email</mat-icon>
-              <input matInput formControlName="email" />
-            </mat-form-field>
-          </div>
-
-          <div class="senha-container">
-            <mat-form-field appearance="outline">
-              <mat-label>Senha</mat-label>
-              <mat-icon matPrefix>lock</mat-icon>
-              <input
-                matInput
-                [type]="hidePassword() ? 'password' : 'text'"
-                formControlName="senha" />
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="clickEventPassword($event)"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hidePassword()">
-                <mat-icon> {{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
-              </button>
-              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('required')">
-                Senha é obrigatória!
-              </mat-error>
-              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('minlength')">
-                A senha deve ter no mínimo 10 caracteres!
-              </mat-error>
-              <mat-error *ngIf="formGroupLogin.get('senha')?.hasError('senhaFraca')">
-                A senha deve conter letra maiúscula, minúscula, número e caractere especial!
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="confirmar-senha-container">
-            <mat-form-field appearance="outline">
-              <mat-label>Confirmar Senha</mat-label>
-              <mat-icon matPrefix>lock</mat-icon>
-              <input
-                matInput
-                [type]="hideConfirmPassword() ? 'password' : 'text'"
-                formControlName="confirmarSenha"/>
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="clickEventConfirmPassword($event)"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hideConfirmPassword()">
-                <mat-icon>
-                  {{ hideConfirmPassword() ? "visibility_off" : "visibility" }}
-                </mat-icon>
-              </button>
-              <mat-error *ngIf="formGroupLogin.get('confirmarSenha')?.hasError('required')">
-                Confirmar senha é obrigatória!
-              </mat-error>
-              <mat-error *ngIf="formGroupLogin.get('confirmarSenha')?.hasError('senhaDiferente')">
-                As senhas precisam ser iguais!
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="btn-finalizar-container">
-            <button
-              class="btn-finalizar"
-              mat-fab
-              (click)="verificarFormGroupLogin()">
-              FINALIZAR
-            </button>
-          </div>
-
-          <div class="btn-voltar-container">
-            <button class="btn-voltar" mat-fab matStepperPrevious>
-              VOLTAR
-            </button>
-          </div>
-        </form>
+      <mat-step [editable]="isEditable">
+        <ng-template matStepLabel>Finalizar</ng-template>
       </mat-step>
     </mat-stepper>
   </div>

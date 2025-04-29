@@ -4,9 +4,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   standalone: true,
@@ -40,9 +40,11 @@ export class EsqueceuSenhaComponent {
     if (this.email.hasError('required')) {
       this.emailError.set('Por favor, digite um e-mail!');
     }
+
     else if (this.email.hasError('email')) {
       this.emailError.set('Por favor, digite um e-mail válido!');
     }
+
     else {
       this.emailError.set('');
     }
