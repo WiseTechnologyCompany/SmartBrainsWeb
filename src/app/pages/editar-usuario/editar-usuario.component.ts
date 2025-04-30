@@ -7,11 +7,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
-import { EditarUsuarioService } from './editar-usuario.service';
 import { GlobalFormats } from '../../utils/formats/GlobalFormats';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GlobalValidators } from '../../utils/validators/GlobalValidators';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import { EditarUsuarioService, UsuarioDTO } from './editar-usuario.service';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   standalone: true,
@@ -37,9 +37,9 @@ export class EditarUsuarioComponent implements OnInit {
   isEditable = true;
   formGroupDadosPessoais: FormGroup;
 
-  ngOnInit(): void {
-    const usuarioDTO = this.editarUsuarioService.getUsuario();
-    console.log('UsuarioDTO: ', usuarioDTO);
+  async ngOnInit(): Promise<void> {
+    const usuarioDTO = await this.editarUsuarioService.getUsuario();
+    this.formGroupDadosPessoais.patchValue(usuarioDTO);
   }
 
   constructor(
@@ -50,7 +50,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.formGroupDadosPessoais = this._formBuilder.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
-      dataNascimento: ['', [Validators.required, GlobalValidators.dataNascimentoValidator]],
+      dataNascimento: ['', [Validators.required, GlobalValidators.dataNascimentoValidator],],
       cpf: ['', [Validators.required, GlobalValidators.CPFValidator]],
       telefone: ['', Validators.required],
       profissao: ['', Validators.required],
@@ -88,9 +88,15 @@ export class EditarUsuarioComponent implements OnInit {
     }
 
     this.formGroupDadosPessoais.markAllAsTouched();
+    this.editarUsuarioService.updateUsuario(this.createBodyUser());
+    this.formGroupDadosPessoais.get('dataNascimento')?.setErrors(null);
+
+    setTimeout(() => {
+      this.router.navigate(['/dashboard']);
+    }, 2000);
   }
 
-  private createBodyUser() {
+  private createBodyUser(): UsuarioDTO {
     const dados = this.formGroupDadosPessoais;
 
     return {

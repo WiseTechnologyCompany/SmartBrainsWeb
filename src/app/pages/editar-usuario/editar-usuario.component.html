@@ -100,11 +100,11 @@
             <mat-form-field appearance="outline">
               <mat-label>Estado Civil</mat-label>
               <mat-select formControlName="estadoCivil">
-                <mat-option value="1">Solteiro</mat-option>
-                <mat-option value="2">União Estável</mat-option>
-                <mat-option value="3">Casado</mat-option>
-                <mat-option value="4">Divorciado</mat-option>
-                <mat-option value="5">Viúvo</mat-option>
+                <mat-option [value]="1">Solteiro</mat-option>
+                <mat-option [value]="2">União Estável</mat-option>
+                <mat-option [value]="3">Casado</mat-option>
+                <mat-option [value]="4">Divorciado</mat-option>
+                <mat-option [value]="5">Viúvo</mat-option>                
               </mat-select>
               <mat-error *ngIf=" formGroupDadosPessoais.get('estadoCivil')?.hasError('required')">
                 Selecione um Estado Civil!

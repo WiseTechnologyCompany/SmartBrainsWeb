@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -25,6 +26,7 @@ export class EditarUsuarioService {
 
   async getUsuarioIdByEmail(email: string): Promise<number> {
     const response = await firstValueFrom(this.httpClient.post<{ id: number }>(`${this.API_URL}/info`, { email }));
+
     return response.id;
   }
 
@@ -34,6 +36,22 @@ export class EditarUsuarioService {
     const response = await firstValueFrom(this.httpClient.get<UsuarioDTO>(`${this.API_URL + '/' + usuarioId}`));
 
     return response;
+  }
+
+  async updateUsuario(usuarioDTO: UsuarioDTO): Promise<void> {
+    const usuarioId = await this.getUsuarioIdByEmail(usuarioDTO.email);
+    const response = await firstValueFrom(this.httpClient.patch<UsuarioDTO>(`${this.API_URL + '/' + usuarioId}`, usuarioDTO));
+
+    if (response) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Usuário atualizado com sucesso!',
+        showConfirmButton: false,
+        timer: 1750,
+        width: '32%',
+      });
+    }
   }
 
   async checkEmail(email: string): Promise<boolean> {
