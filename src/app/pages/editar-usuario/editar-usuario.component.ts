@@ -50,7 +50,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.formGroupDadosPessoais = this._formBuilder.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
-      dataNascimento: ['', [Validators.required, GlobalValidators.dataNascimentoValidator],],
+      dataNascimento: ['', [Validators.required, GlobalValidators.dataNascimentoValidator]],
       cpf: ['', [Validators.required, GlobalValidators.CPFValidator]],
       telefone: ['', Validators.required],
       profissao: ['', Validators.required],
@@ -90,10 +90,6 @@ export class EditarUsuarioComponent implements OnInit {
     this.formGroupDadosPessoais.markAllAsTouched();
     this.editarUsuarioService.updateUsuario(this.createBodyUser());
     this.formGroupDadosPessoais.get('dataNascimento')?.setErrors(null);
-
-    setTimeout(() => {
-      this.router.navigate(['/dashboard']);
-    }, 2000);
   }
 
   private createBodyUser(): UsuarioDTO {
@@ -116,9 +112,7 @@ export class EditarUsuarioComponent implements OnInit {
     const emailControl = this.formGroupDadosPessoais.get('email');
 
     if (emailControl && emailControl.valid) {
-      const existe = await this.editarUsuarioService.checkEmail(
-        emailControl.value
-      );
+      const existe = await this.editarUsuarioService.checkEmail(emailControl.value);
 
       if (existe) {
         emailControl.setErrors({ emailJaCadastrado: true });

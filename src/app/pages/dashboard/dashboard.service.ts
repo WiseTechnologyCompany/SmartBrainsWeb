@@ -35,6 +35,7 @@ export class DashboardService extends MatPaginatorIntl {
   }
 
   getAllUserTransactions(): Observable<MovimentacaoDTO[]> {
+    console.log(this.getEmail());
     return this.httpClient.post<MovimentacaoDTO[]>(this.API_URL + '/user/table', {email: this.getEmail()});
   }
 
