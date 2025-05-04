@@ -7,8 +7,9 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 export interface MovimentacaoDTO {
   id: number;
   tipoMovimentacao: string;
+  tipoCategoria: string;
   descricao: string;
-  valor: number;
+  valor: string;
   dataCriacao: Date;
 }
 
@@ -35,7 +36,6 @@ export class DashboardService extends MatPaginatorIntl {
   }
 
   getAllUserTransactions(): Observable<MovimentacaoDTO[]> {
-    console.log(this.getEmail());
     return this.httpClient.post<MovimentacaoDTO[]>(this.API_URL + '/user/table', {email: this.getEmail()});
   }
 

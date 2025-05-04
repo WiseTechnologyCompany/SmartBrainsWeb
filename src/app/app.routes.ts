@@ -7,6 +7,7 @@ import { AccessDeniedComponent } from './pages/access-denied/access-denied.compo
 import { EsqueceuSenhaComponent } from './pages/esqueceu-senha/esqueceu-senha.component';
 import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.component';
 import { AdicionarComponent } from './pages/adicionar-transacao/adicionar-transacao.component';
+import { RelatorioComponent } from './pages/relatorio/relatorio.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'adicionar', component: AdicionarComponent },
   { path: 'access-denied', component: AccessDeniedComponent },
   { path: 'editar-usuario', component: EditarUsuarioComponent },
+  { path: 'relatorio', component: RelatorioComponent },
   { path: '**', component: NotFoundComponent }, 
 ];

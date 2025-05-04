@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
@@ -7,17 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { DashboardService, MovimentacaoDTO, TotalTransactionsDTO } from './dashboard.service';
+import { MovimentacaoDTO, DashboardService } from '../dashboard/dashboard.service';
 
 @Component({
   standalone: true,
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-relatorio',
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -31,14 +29,17 @@ import { DashboardService, MovimentacaoDTO, TotalTransactionsDTO } from './dashb
     RouterModule,
     MatMenuModule
   ],
+  templateUrl: './relatorio.component.html',
+  styleUrl: './relatorio.component.scss',
   providers: [provideNativeDateAdapter()],
 })
-export class DashboardComponent implements OnInit {
+export class RelatorioComponent implements OnInit {
 
   receita: number = 0;
   entrada: number = 0;
   gastosFixos: number = 0;
   despesas: number = 0;
+
   displayedColumns: string[] = ['id', 'tipoMovimentacao', 'tipoCategoria', 'descricao', 'valor', 'dataCriacao', 'botoes'];
   dataSource!: MatTableDataSource<MovimentacaoDTO>;
 
@@ -52,12 +53,6 @@ export class DashboardComponent implements OnInit {
       this.dataSource = new MatTableDataSource(movimentacaoDTO);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    });
-
-    this.dashboardService.getUserTotalTransactions().subscribe((totalTransactionsDTO: TotalTransactionsDTO) => {
-      this.entrada = totalTransactionsDTO.totalEntrada;
-      this.gastosFixos = totalTransactionsDTO.totalGastosFixos;
-      this.despesas = totalTransactionsDTO.totalDespesas;
     });
   }
 
@@ -78,46 +73,6 @@ export class DashboardComponent implements OnInit {
     const profissao = sessionStorage.getItem('profissao') ?? '';
     const empresa = sessionStorage.getItem('empresa') ?? '';
     return `${profissao} - ${empresa}`;
-  }
-
-  getReceita() { 
-    const totalSaida = this.gastosFixos + this.despesas;
-  
-    if (totalSaida === 0 || totalSaida === null || totalSaida === undefined) {
-      return 'R$ 0,00';
-    }
-    
-    if (totalSaida > this.entrada) {
-      const resultado = ((this.entrada - totalSaida) / this.entrada) * 100;
-      return (resultado + 100).toFixed(2) + '%';
-    }
-  
-    const resultado = parseFloat(((this.entrada - totalSaida) / this.entrada * 100).toFixed(2));
-    return (100 - resultado).toFixed(2) + '%';
-  }  
-
-  getTotalEntrada() {
-    if (this.entrada === 0 || this.entrada === null || this.entrada === undefined) {
-      return 'R$ 0,00';
-    }
-
-    return this.entrada.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  }
-
-  getTotalGastosFixos() {
-    if (this.gastosFixos === 0 || this.gastosFixos === null || this.gastosFixos === undefined) {
-      return 'R$ 0,00';
-    }
-
-    return this.gastosFixos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  }
-
-  getTotalDespesas() {
-    if (this.despesas === 0 || this.despesas === null || this.despesas === undefined) {
-      return 'R$ 0,00';
-    }
-
-    return this.despesas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
   logout() {
