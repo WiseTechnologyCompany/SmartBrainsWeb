@@ -42,4 +42,8 @@ export class DashboardService extends MatPaginatorIntl {
   getUserTotalTransactions(): Observable<TotalTransactionsDTO> {
     return this.httpClient.post<TotalTransactionsDTO>(this.API_URL + '/user/card', {email: this.getEmail()});
   }
+
+  deleteTransaction(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.API_URL}/${id}`);
+  }
 }

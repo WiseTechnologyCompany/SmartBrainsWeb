@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
-import {MatMenuModule} from '@angular/material/menu';
+import { RouterModule } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { LogoutService } from '../../utils/logout/logout-service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DashboardService, MovimentacaoDTO, TotalTransactionsDTO } from './dashboard.service';
+import Swal from 'sweetalert2';
 
 @Component({
   standalone: true,
@@ -45,7 +47,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly router: Router, private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService, private logoutService: LogoutService) {}
 
   ngOnInit() {
     this.dashboardService.getAllUserTransactions().subscribe((movimentacaoDTO: MovimentacaoDTO[]) => {
@@ -120,8 +122,51 @@ export class DashboardComponent implements OnInit {
     return this.despesas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
+  confirmarExcluir(id: number) {
+    Swal.fire({
+      title: "Atenção",
+      text: "Gostaria de excluir esse transação?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "blue",
+      cancelButtonColor: "red",     
+      confirmButtonText: "EXCLUIR",
+      cancelButtonText: "CANCELAR",
+      reverseButtons: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.excluir(id);
+      }
+    });
+  }
+
+  excluir(id: number): void {
+    this.dashboardService.deleteTransaction(id).subscribe({
+      next: () => { 
+        Swal.fire({
+          title: "Sucesso!",
+          text: "Transação excluída com sucesso!",
+          icon: "success",
+          confirmButtonText: "OK",
+          confirmButtonColor: "blue",
+        }).then(() => {
+          location.reload(); 
+        });
+      },
+      error: () => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ocorreu um erro ao excluir a transação, tente novamente!",
+          confirmButtonText: "OK",
+          confirmButtonColor: "red",
+          width: '35%'
+        });
+      }
+    });
+  }
+  
   logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/login']);
+    this.logoutService.logout();
   }
 }

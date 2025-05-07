@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LogoutService } from '../../utils/logout/logout-service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AdicionarTransacaoService } from './adicionar-transacao.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -40,7 +41,7 @@ export class AdicionarComponent {
   formGroupNovaTransacao: FormGroup;
 
   constructor(
-    private readonly router: Router,
+    private logoutService: LogoutService,
     private readonly _formBuilder: FormBuilder,
     private readonly adicionarTransacaoService: AdicionarTransacaoService
   ) {
@@ -62,11 +63,6 @@ export class AdicionarComponent {
     const profissao = sessionStorage.getItem('profissao') ?? '';
     const empresa = sessionStorage.getItem('empresa') ?? '';
     return `${profissao} - ${empresa}`;
-  }
-
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/login']);
   }
 
   verificarFormGroupNovaTransacao() {
@@ -119,5 +115,9 @@ export class AdicionarComponent {
     const dataCriacao = this.formGroupNovaTransacao.get('dataCriacao')?.value;
 
     return { usuario, tipoMovimentacao, tipoCategoria, descricao, observacao, valor, dataCriacao, };
+  }
+
+  logout() {
+    this.logoutService.logout();
   }
 }

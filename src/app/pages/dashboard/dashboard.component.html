@@ -265,7 +265,7 @@
           </ng-container>
 
           <ng-container matColumnDef="dataCriacao">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Criação</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Data</th>
             <td mat-cell *matCellDef="let row">{{ row.dataCriacao }}</td>
           </ng-container>
 
@@ -278,7 +278,7 @@
                   <mat-icon>edit</mat-icon>
                 </button>
 
-                <button class="botao-excluir" title="Excluir" mat-fab color="warn">
+                <button class="botao-excluir" title="Excluir" mat-fab color="warn" (click)="confirmarExcluir(row.id)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
@@ -291,8 +291,8 @@
           <tr class="mat-row" *matNoDataRow>
             <td
               class="mat-cell"
-              colspan="5"
-              style="text-align: center; padding: 24px">
+              colspan="7"
+              style="text-align: center; padding: 24px;">
               <span style="margin-left: 8px">Nenhum registro foi encontrado no momento, verifique os filtros ou adicione novos registros!</span>
             </td>
           </tr>

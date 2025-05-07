@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/Environment';
+import { LogoutService } from '../utils/logout/logout-service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class AuthService {
   private readonly access_token = 'access_token';
   private readonly URL = `${environment.API_URL}/auth/check/token`;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private logoutService: LogoutService) {}
 
   getToken(): string | null {
     return sessionStorage.getItem(this.access_token);
@@ -37,6 +38,6 @@ export class AuthService {
   }
 
   logout(): void {
-    sessionStorage.removeItem(this.access_token);
+    this.logoutService.logout();
   }
 }
