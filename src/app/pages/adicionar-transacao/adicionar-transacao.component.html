@@ -112,7 +112,7 @@
     <form [formGroup]="formGroupNovaTransacao">
       <div class="transaction-type">
         <div class="type-option">
-          <input formControlName="tipoTransacao" type="radio" name="tipoTransacao" id="type-expense" value="3" />
+          <input formControlName="tipoMovimentacao" type="radio" id="type-expense" [value]="3" />
           <label for="type-expense" class="type-label expense">
             <span class="type-icon">📉</span>
             <span class="type-name">Despesa</span>
@@ -120,7 +120,7 @@
         </div>
       
         <div class="type-option">
-          <input formControlName="tipoTransacao" type="radio" name="tipoTransacao" id="type-income" value="1" />
+          <input formControlName="tipoMovimentacao" type="radio" id="type-income" [value]="1" />
           <label for="type-income" class="type-label income">
             <span class="type-icon">💰</span>
             <span class="type-name">Entrada</span>
@@ -128,7 +128,7 @@
         </div>
       
         <div class="type-option">
-          <input formControlName="tipoTransacao" type="radio" name="tipoTransacao" id="type-fixed" value="2" />
+          <input formControlName="tipoMovimentacao" type="radio" id="type-fixed" [value]="2" />
           <label for="type-fixed" class="type-label fixed">
             <span class="type-icon">🧾</span>
             <span class="type-name">Gastos Fixos</span>
@@ -164,7 +164,7 @@
         <div class="form-group">
           <mat-form-field appearance="outline">
             <mat-label>Data</mat-label>
-            <input formControlName="dataCriacao" matInput (click)="picker.open()" [matDatepicker]="picker">
+            <input formControlName="dataCriacao" matInput (click)="picker.open()" [matDatepicker]="picker" type="text">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi #picker></mat-datepicker>
           </mat-form-field>
@@ -182,80 +182,80 @@
 
       <div class="category-icons">
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-salary" value="1">
-          <label for="cat-salary" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="salary" [value]="1">
+          <label for="salary" class="category-label">
             <span class="category-icon">💼</span>
             <span class="category-name">Salário</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-food" value="2">
-          <label for="cat-food" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="food" [value]="2">
+          <label for="food" class="category-label">
             <span class="category-icon">🍔</span>
             <span class="category-name">Alimentação</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-transport" value="3">
-          <label for="cat-transport" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="transport" [value]="3">
+          <label for="transport" class="category-label">
             <span class="category-icon">🚗</span>
             <span class="category-name">Transporte</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-home" value="4">
-          <label for="cat-home" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="home" [value]="4">
+          <label for="home" class="category-label">
             <span class="category-icon">🏠</span>
             <span class="category-name">Moradia</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-entertainment" value="5">
-          <label for="cat-entertainment" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="entertainment" [value]="5">
+          <label for="entertainment" class="category-label">
             <span class="category-icon">🎬</span>
             <span class="category-name">Lazer</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-health" value="6">
-          <label for="cat-health" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="health" [value]="6">
+          <label for="health" class="category-label">
             <span class="category-icon">💊</span>
             <span class="category-name">Saúde</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-education" value="7">
-          <label for="cat-education" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="education" [value]="7">
+          <label for="education" class="category-label">
             <span class="category-icon">📚</span>
             <span class="category-name">Educação</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-shopping" value="8">
-          <label for="cat-shopping" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="shopping" [value]="8">
+          <label for="shopping" class="category-label">
             <span class="category-icon">🛍️</span>
             <span class="category-name">Compras</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-bills" value="9">
-          <label for="cat-bills" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="bills" [value]="9">
+          <label for="bills" class="category-label">
             <span class="category-icon">📄</span>
             <span class="category-name">Contas</span>
           </label>
         </div>
 
         <div class="category-option">
-          <input formControlName="tipoCategoria" type="radio" name="tipoCategoria" id="cat-other" value="10">
-          <label for="cat-other" class="category-label">
+          <input formControlName="tipoCategoria" type="radio" id="other" [value]="10">
+          <label for="other" class="category-label">
             <span class="category-icon">📌</span>
             <span class="category-name">Outros</span>
           </label>

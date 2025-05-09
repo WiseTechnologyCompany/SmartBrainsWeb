@@ -4,6 +4,15 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/Environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+export interface EditTransactionDTO {
+  tipoMovimentacao: number;
+  descricao: string;
+  valor: number;
+  dataCriacao: string,
+  observacao: string,
+  tipoCategoria: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,6 +24,10 @@ export class AdicionarTransacaoService {
   getEmail() {
     return sessionStorage.getItem('email') ?? '';
   }
+
+  async findTransactionById(id: number): Promise<EditTransactionDTO> {
+    return await firstValueFrom(this.httpClient.get<any>(`${this.API_URL}/movimentacao/edit/${id}`));
+  }  
 
   async getUserIdByEmail() {
     const email = this.getEmail();
@@ -44,4 +57,34 @@ export class AdicionarTransacaoService {
 
     return null;
   }
+
+  async updateTransaction(id: number, body: any) {
+    try {
+      const response = await firstValueFrom(this.httpClient.patch<{ body: any }>(`${this.API_URL}/movimentacao/${id}`, body));
+  
+      if (response) {
+        await Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Transação atualizada com sucesso!',
+          showConfirmButton: false,
+          timer: 1750,
+          width: '30%',
+        });
+      }
+
+      return response;
+    } catch (error) {
+      await Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Erro ao atualizar a transação',
+        text: 'Tente novamente mais tarde.',
+        showConfirmButton: true,
+        width: '30%',
+      });
+
+      return null;
+    }
+  }  
 }

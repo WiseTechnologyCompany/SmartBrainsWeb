@@ -26,8 +26,7 @@ export class EditarUsuarioService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   async getUsuarioIdByEmail(email: string): Promise<number> {
-    const response = await firstValueFrom(
-      this.httpClient.post<{ id: number }>(`${this.API_URL}/usuarios/info`, {email}));
+    const response = await firstValueFrom(this.httpClient.post<{ id: number }>(`${this.API_URL}/usuarios/info`, {email}));
 
     return response.id;
   }

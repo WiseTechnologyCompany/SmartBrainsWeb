@@ -15,6 +15,7 @@ export const routes: Routes = [
   { path: 'criar-conta', component: CriarContaComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'adicionar', component: AdicionarComponent },
+  { path: 'adicionar/:id', component: AdicionarComponent },
   { path: 'access-denied', component: AccessDeniedComponent },
   { path: 'editar-usuario', component: EditarUsuarioComponent },
   { path: '**', component: NotFoundComponent }, 

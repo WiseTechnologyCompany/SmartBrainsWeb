@@ -274,7 +274,7 @@
             <td mat-cell *matCellDef="let row">{{ row.botoes }}
 
               <div class="botoes">
-                <button class="botao-editar" title="Editar" mat-fab color="primary">
+                <button class="botao-editar" title="Editar" mat-fab color="primary" [routerLink]="['/adicionar', row.id]">
                   <mat-icon>edit</mat-icon>
                 </button>
 

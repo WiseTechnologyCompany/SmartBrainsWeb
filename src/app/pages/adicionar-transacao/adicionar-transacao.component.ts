@@ -1,13 +1,13 @@
 import Swal from 'sweetalert2';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,16 +37,26 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   ],
   providers: [provideNativeDateAdapter()],
 })
-export class AdicionarComponent {
+export class AdicionarComponent implements OnInit {
   formGroupNovaTransacao: FormGroup;
 
+  async ngOnInit(): Promise<void> {
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      const dados = await this.adicionarTransacaoService.findTransactionById(+id);
+      this.formGroupNovaTransacao.patchValue(dados);
+    }
+  }
+
   constructor(
+    private route: ActivatedRoute,
     private logoutService: LogoutService,
     private readonly _formBuilder: FormBuilder,
     private readonly adicionarTransacaoService: AdicionarTransacaoService
   ) {
     this.formGroupNovaTransacao = this._formBuilder.group({
-      tipoTransacao: ['', Validators.required],
+      tipoMovimentacao: ['', Validators.required],
       descricao: ['', Validators.required],
       valor: ['', Validators.required],
       dataCriacao: ['', Validators.required],
@@ -66,10 +76,10 @@ export class AdicionarComponent {
   }
 
   verificarFormGroupNovaTransacao() {
-    const tipoTransacao = this.formGroupNovaTransacao.get('tipoTransacao')?.value;
+    const tipoMovimentacao = this.formGroupNovaTransacao.get('tipoMovimentacao')?.value;
     const tipoCategoria = this.formGroupNovaTransacao.get('tipoCategoria')?.value;
 
-    if (!tipoTransacao || tipoTransacao === '') {
+    if (tipoMovimentacao === null || tipoMovimentacao === undefined || tipoMovimentacao === '') {
       Swal.fire({
         title: 'Oops!',
         text: 'Por favor, selecione o tipo de transação.',
@@ -94,12 +104,33 @@ export class AdicionarComponent {
     }
 
     this.formGroupNovaTransacao.markAllAsTouched();
-    this.sendRequest();
-
-    setTimeout(() => {
-     this.formGroupNovaTransacao.reset()}, 500);
+    this.sendTransactionRequest()
   }
 
+  private async sendTransactionRequest() {
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log('ID capturado da rota:', id);
+
+  
+    if (!id) {
+      this.sendRequest();
+  
+      setTimeout(() => {
+        this.formGroupNovaTransacao.reset();
+      }, 500);
+  
+      return; 
+    }
+  
+    const body = await this.createRequestBody();
+    console.log('Corpo enviado para a API:', body);
+    await this.adicionarTransacaoService.updateTransaction(Number(id), body);
+  
+    setTimeout(() => {
+      this.formGroupNovaTransacao.reset();
+    }, 500);
+  }
+  
   private async sendRequest() {
     const body = await this.createRequestBody();
     this.adicionarTransacaoService.saveNewTransaction(body);
@@ -107,14 +138,14 @@ export class AdicionarComponent {
 
   private async createRequestBody() {
     const usuario = await this.adicionarTransacaoService.getUserIdByEmail();
-    const tipoMovimentacao = this.formGroupNovaTransacao.get('tipoTransacao')?.value;
+    const tipoMovimentacao = this.formGroupNovaTransacao.get('tipoMovimentacao')?.value;
     const tipoCategoria = this.formGroupNovaTransacao.get('tipoCategoria')?.value;
     const descricao = this.formGroupNovaTransacao.get('descricao')?.value;
     const observacao = this.formGroupNovaTransacao.get('observacao')?.value;
     const valor = this.formGroupNovaTransacao.get('valor')?.value;
     const dataCriacao = this.formGroupNovaTransacao.get('dataCriacao')?.value;
 
-    return { usuario, tipoMovimentacao, tipoCategoria, descricao, observacao, valor, dataCriacao, };
+    return { usuario, tipoMovimentacao, tipoCategoria, descricao, observacao, valor, dataCriacao };
   }
 
   logout() {
