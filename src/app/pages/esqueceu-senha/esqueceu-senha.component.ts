@@ -1,11 +1,13 @@
-import { merge } from 'rxjs';
+import Swal from 'sweetalert2';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EsqueceuSenhaService } from './esqueceu-senha.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { GlobalValidators } from '../../utils/validators/GlobalValidators';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -15,6 +17,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
   styleUrl: './esqueceu-senha.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -24,29 +27,51 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
     ReactiveFormsModule,
   ],
 })
-
 export class EsqueceuSenhaComponent {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
+  readonly email = new FormControl('', [
+    Validators.required,
+    GlobalValidators.emailValidator,
+  ]);
 
-  emailError = signal('');
+  constructor(private readonly esqueceuSenhaService: EsqueceuSenhaService) {}
 
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.emailErrorMessage());
+  getEmailError(): string {
+    if (this.email.hasError('required')) {
+      return 'Por favor, digite um e-mail!';
+    }
+
+    if (this.email.hasError('invalidEmail')) {
+      return 'Por favor, digite um e-mail válido!';
+    }
+
+    return '';
   }
 
-  emailErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.emailError.set('Por favor, digite um e-mail!');
-    }
+  verificarFormGroup() {
+    this.email.markAllAsTouched();
 
-    else if (this.email.hasError('email')) {
-      this.emailError.set('Por favor, digite um e-mail válido!');
-    }
+    this.verificarEmailExistente();
+  }
 
-    else {
-      this.emailError.set('');
+  async verificarEmailExistente() {
+    const email = this.email.value;
+    console.log(email);
+
+    if (email && email.length > 0) {
+      const existe = await this.esqueceuSenhaService.checkEmail(email);
+
+      if (existe) {
+        sessionStorage.setItem('email', email);
+        await this.esqueceuSenhaService.sendEmail({ email });
+      } else {
+        Swal.fire({
+          title: 'Atenção!',
+          text: 'O e-mail informado não existe em nosso sistema! Por favor, verifique e tente novamente.',
+          icon: 'warning',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#76a7b9',
+        });
+      }
     }
   }
 }

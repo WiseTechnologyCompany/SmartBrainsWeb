@@ -7,6 +7,8 @@ import { AccessDeniedComponent } from './pages/access-denied/access-denied.compo
 import { EsqueceuSenhaComponent } from './pages/esqueceu-senha/esqueceu-senha.component';
 import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.component';
 import { AdicionarComponent } from './pages/adicionar-transacao/adicionar-transacao.component';
+import { CodigoVerificacaoComponent } from './pages/codigo-verificacao/codigo-verificacao.component';
+import { AtualizarSenhaComponent } from './pages/atualizar-senha/atualizar-senha.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,5 +20,7 @@ export const routes: Routes = [
   { path: 'adicionar/:id', component: AdicionarComponent },
   { path: 'access-denied', component: AccessDeniedComponent },
   { path: 'editar-usuario', component: EditarUsuarioComponent },
+  { path: 'codigo-verificacao', component: CodigoVerificacaoComponent },
+  { path: 'atualizar-senha', component: AtualizarSenhaComponent },
   { path: '**', component: NotFoundComponent }, 
 ];
