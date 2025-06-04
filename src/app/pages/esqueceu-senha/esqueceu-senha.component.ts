@@ -55,7 +55,6 @@ export class EsqueceuSenhaComponent {
 
   async verificarEmailExistente() {
     const email = this.email.value;
-    console.log(email);
 
     if (email && email.length > 0) {
       const existe = await this.esqueceuSenhaService.checkEmail(email);

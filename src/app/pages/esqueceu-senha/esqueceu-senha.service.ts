@@ -1,8 +1,9 @@
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/Environment';
-import Swal from 'sweetalert2';
 
 export interface UserEmailDTO {
   email: string;
@@ -19,7 +20,7 @@ export interface CodigoVerificacaoDTO {
 export class EsqueceuSenhaService {
   private readonly URL = `${environment.API_URL}`;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private readonly router: Router, private httpClient: HttpClient) {}
 
   async checkEmail(email: string): Promise<boolean> {
     const response = await firstValueFrom(
@@ -46,6 +47,8 @@ export class EsqueceuSenhaService {
         icon: 'success',
         confirmButtonText: 'OK',
         confirmButtonColor: '#76a7b9',
+      }).then(() => {
+        this.router.navigate(['/codigo-verificacao']);
       });
     } else {
       Swal.fire({
