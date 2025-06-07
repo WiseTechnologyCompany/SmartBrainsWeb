@@ -1,0 +1,115 @@
+$cor-fundo: #f8f9f9;
+$cor-primaria: #76a7b9;
+$cor-texto-preto: #000000;
+$cor-fundo-branco: #ffffff;
+$cor-texto-branco: #ffffff;
+$cor-sombra: rgba(0, 0, 0, 0.3);
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: $cor-fundo;
+}
+
+.codigo-verificacao-container {
+  width: 67rem;
+  height: 42rem;
+  border-radius: 1rem;
+  background-color: $cor-fundo-branco;
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.logo-container {
+  display: flex;
+  padding-top: 5%;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.logo-wisefinances {
+  width: 15%;
+  background-color: transparent;
+}
+
+.titulo {
+  display: flex;
+  padding-top: 4.2% !important;
+  justify-content: center;
+  background-color: transparent;
+  font-size: 185%;
+  color: $cor-texto-preto;
+  font-weight: 400;
+}
+
+.subtitulo {
+  display: flex;
+  padding-top: 2%;
+  justify-content: center;
+  background-color: transparent;
+  font-size: 110%;
+  color: $cor-texto-preto;
+  font-weight: 400;
+}
+
+.codigo-container,
+mat-form-field {
+  width: 100%;
+  display: flex;
+  padding-top: 2.5%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
+mat-form-field button {
+  margin-left: -18%;
+}
+
+.btn-container {
+  display: flex;
+  padding-top: 3%;
+  gap: 14%;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.btn-cancelar {
+  font-size: 21px;
+  width: 18%;
+  font-weight: 600;
+  background-color: $cor-primaria;
+  color: $cor-texto-branco !important;
+}
+
+.btn-enviar {
+  font-size: 21px;
+  width: 18%;
+  font-weight: 600;
+  background-color: $cor-primaria;
+  color: $cor-texto-branco !important;
+}
+
+.btn-cancelar:hover {
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.btn-enviar:hover {
+  box-shadow: -0.4rem 0.6rem 1.5rem $cor-sombra;
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: $cor-primaria;
+  background-color: $cor-fundo;
+  padding-bottom: 0.5%;
+}

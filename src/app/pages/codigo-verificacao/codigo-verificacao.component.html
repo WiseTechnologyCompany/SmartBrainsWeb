@@ -1,1 +1,43 @@
-<p>codigo-verificacao works!</p>
+<div class="leFadeInLeft main-container">
+  <div class="codigo-verificacao-container">
+    <div class="logo-container">
+      <img class="logo-wisefinances" src="wisefinances.png" alt="Logo da Wise Finances" />
+    </div>
+
+    <div class="titulo">
+      <p>Código de Verificação</p>
+    </div>
+
+    <div class="subtitulo">
+      <p>Digite o Código de Verificação enviado para o seu e-mail.</p>
+    </div>
+
+    <div [formGroup]="formGroupCodigoVerificacao" class="codigo-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Código de Verificação</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input
+         matInput 
+         formControlName="codigoVerificacao"
+         required
+         mask="0000-0000" />
+        <mat-error *ngIf="formGroupCodigoVerificacao.get('codigoVerificacao')?.hasError('required')">
+            Código de Verificação é obrigatório!
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="btn-container">
+      <button [routerLink]="['/esqueceu-senha']" class="btn-cancelar" mat-fab>
+        CANCELAR
+      </button>
+      <button class="btn-enviar" mat-fab (click)="verificarCodigo()">ENVIAR</button>
+    </div>
+  </div>
+
+  <div class="footer-container">
+    <footer>
+      <p>© 2025 Wise Finances</p>
+    </footer>
+  </div>
+</div>
