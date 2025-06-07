@@ -4,8 +4,7 @@
 
 
 <div align="center"> 
-  O Template de Login foi desenvolvido com o propósito de otimizar e padronizar a implementação de telas de autenticação em projetos futuros, garantindo maior eficiência, reutilização de código e uma 
-  experiência de usuário consistente.
+  Esta é a interface Web do SmartBrainsAPI, responsável por fornecer uma camada visual que facilita a interação do usuário com as funcionalidades da aplicação. Ela foi desenvolvida visando tornar a experiência mais intuitiva, acessível e agradável, permitindo que o usuário aproveite todos os recursos da API de forma prática e eficiente por meio de uma interface gráfica amigável e moderna.
 </div> <br> 
 
  <br> 
