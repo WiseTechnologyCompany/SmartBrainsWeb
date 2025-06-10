@@ -1,1 +1,80 @@
-<p>atualizar-senha works!</p>
+<div class="leFadeInLeft main-container">
+  <div class="atualizar-senha-container">
+    <div class="logo-container">
+      <img class="logo-wisefinances" src="wisefinances.png" alt="Logo da Wise Finances" />
+    </div>
+
+    <div class="titulo">
+      <p>Atualizar Senha</p>
+    </div>
+
+    <div class="subtitulo">
+      <p>Por favor, informe e confirme sua nova senha.</p>
+    </div>
+
+    <div [formGroup]="formGroupSenha" class="senha-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input
+          matInput
+          [type]="hidePassword() ? 'password' : 'text'"
+          formControlName="senha" />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEventPassword($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword()" >
+          <mat-icon> {{ hidePassword() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="formGroupSenha.get('senha')?.hasError('required')">
+          Senha é obrigatória!
+        </mat-error>
+        <mat-error *ngIf="formGroupSenha.get('senha')?.hasError('minlength')">
+          A senha deve ter no mínimo 10 caracteres!
+        </mat-error>
+        <mat-error *ngIf="formGroupSenha.get('senha')?.hasError('senhaFraca')">
+          A senha deve conter letra maiúscula, minúscula, número e caractere
+          especial!
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div [formGroup]="formGroupSenha" class="senha-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar Senha</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input
+          matInput
+          [type]="hideConfirmPassword() ? 'password' : 'text'"
+          formControlName="confirmarSenha"/>
+          <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEventConfirmPassword($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hideConfirmPassword()">
+          <mat-icon>{{ hideConfirmPassword() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error *ngIf="formGroupSenha.get('confirmarSenha')?.hasError('required')">
+            Confirmar senha é obrigatória!
+          </mat-error>
+          <mat-error *ngIf="formGroupSenha.get('confirmarSenha')?.hasError('senhaDiferente')">
+            As senhas precisam ser iguais!
+          </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="btn-container">
+      <button class="btn-cancelar" [routerLink]="['/login']" mat-fab>CANCELAR</button>
+      <button class="btn-enviar" (click)="verificarFormGroupSenha()" mat-fab>ENVIAR</button>
+    </div>
+  </div>
+
+  <div class="footer-container">
+    <footer>
+      <p>© 2025 Wise Finances</p>
+    </footer>
+  </div>
+</div>

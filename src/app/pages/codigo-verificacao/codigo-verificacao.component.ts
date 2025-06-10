@@ -83,7 +83,7 @@ export class CodigoVerificacaoComponent {
         text: 'Código de Verificação Válido! Você será redirecionado para a página de redefinição de senha.',
         icon: 'success',
         confirmButtonText: 'OK',
-        confirmButtonColor: 'blue',
+        confirmButtonColor: '#76a7b9',
       }).then(() => {
         this.router.navigate(['/atualizar-senha']);
       });
@@ -93,7 +93,7 @@ export class CodigoVerificacaoComponent {
         text: 'Código de Verificação Inválido! Por favor, verifique o Código digitado e tente novamente.',
         icon: 'error',
         confirmButtonText: 'OK',
-        confirmButtonColor: 'blue',
+        confirmButtonColor: '#76a7b9',
       });
     }
   }
