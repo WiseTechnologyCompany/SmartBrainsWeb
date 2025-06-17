@@ -1,0 +1,140 @@
+$cor-primaria: #76a7b9;
+$cor-sombra: rgba(0, 0, 0, 0.3);
+
+.breadcrumb-container {
+  padding: 0.9%;
+  position: relative;
+}
+
+.curve {
+  background-color: #f0f2f5;
+  border-top-left-radius: 50%;
+  box-shadow: -20px -20px 0 0 white;
+  height: 200%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 5%;
+}
+
+.sidebar-icon {
+  align-items: center;
+  color: #606c88;
+  cursor: pointer;
+  display: flex;
+  height: 5%;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 45%;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-icon:hover {
+  transform: scale(1.1);
+}
+
+.logo {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 5%;
+  justify-content: center;
+  margin-bottom: 52%;
+  margin-top: 10%;
+  width: 55px;
+}
+
+.logo-wisefinances {
+  width: 135%;
+  margin-left: 26%;
+}
+
+.main-content {
+  background-color: #f0f2f5;
+  flex: 1;
+  margin-left: 4%;
+  min-height: 100vh;
+}
+
+.sidebar {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 0.7%;
+  position: fixed;
+  width: 80px;
+  z-index: 100;
+}
+
+.top-nav {
+  align-items: center;
+  background-color: #ffffff;
+  display: flex;
+  height: 80px;
+  justify-content: end;
+  padding: 0 45px;
+  position: relative;
+  gap: 10px;
+}
+
+.user-avatar {
+  align-items: center;
+  border-radius: 50%;
+  color: $cor-primaria;
+  cursor: pointer;
+  display: flex;
+  height: 54%;
+  justify-content: center;
+  width: 2%;
+  transition: transform 0.2s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  color: $cor-primaria;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  background-color: white !important;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+  color: black !important;
+  background-color: white !important;
+}
+
+.menu-icon {
+  font-size: 19px;
+  vertical-align: middle;
+}
+
+.menu-opcoes {
+  display: flex;
+  align-items: center;
+  padding-top: 8%;
+}
+
+.sair {
+  color: red !important;
+}
+
+.sair .menu-icon {
+  color: red !important;
+}
+
+.user-role {
+  color: #6c757d;
+  font-size: 13px;
+}

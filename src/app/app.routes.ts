@@ -9,6 +9,7 @@ import { EditarUsuarioComponent } from './pages/editar-usuario/editar-usuario.co
 import { AdicionarComponent } from './pages/adicionar-transacao/adicionar-transacao.component';
 import { CodigoVerificacaoComponent } from './pages/codigo-verificacao/codigo-verificacao.component';
 import { AtualizarSenhaComponent } from './pages/atualizar-senha/atualizar-senha.component';
+import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,5 +23,6 @@ export const routes: Routes = [
   { path: 'editar-usuario', component: EditarUsuarioComponent },
   { path: 'codigo-verificacao', component: CodigoVerificacaoComponent },
   { path: 'atualizar-senha', component: AtualizarSenhaComponent },
+  { path: 'relatorios', component: RelatoriosComponent },
   { path: '**', component: NotFoundComponent }, 
 ];

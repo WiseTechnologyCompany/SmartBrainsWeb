@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
@@ -13,7 +14,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DashboardService, MovimentacaoDTO, TotalTransactionsDTO } from './dashboard.service';
-import Swal from 'sweetalert2';
 
 @Component({
   standalone: true,
