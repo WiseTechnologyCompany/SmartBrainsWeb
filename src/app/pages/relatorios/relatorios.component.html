@@ -108,15 +108,12 @@
       <div class="quadro-categorias">
         <h2 class="titulo">Gastos Por Categorias</h2>
         <div class="conteudo">
-          <div class="card">
-            <p-chart
-              class="card-chart"
-              type="bar"
-              [data]="basicData"
-              [options]="basicOptions"
-              height="350%"
-              width="100%"/>
-          </div>
+          <p-chart 
+          type="pie" 
+          [data]="categoryData" 
+          [options]="options"
+          height="360%" 
+          width="100%" />
         </div>
       </div>
 
@@ -129,7 +126,7 @@
               type="bar"
               [data]="basicData"
               [options]="basicOptions"
-              height="350%"
+              height="360%"
               width="100%" />
           </div>
         </div>
