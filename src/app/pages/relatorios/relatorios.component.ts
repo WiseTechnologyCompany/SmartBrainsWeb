@@ -79,10 +79,17 @@ export class RelatoriosComponent implements OnInit {
 
         datasets: [
           {
-            label: '2025',
+            label: '2024',
             data: [65, 59, 80, 81, 56, 55, 40, 72, 68, 150, 77, 60],
             fill: false,
             borderColor: documentStyle.getPropertyValue('--p-cyan-500'),
+            tension: 0.4,
+          },
+          {
+            label: '2025',
+            data: [28, 48, 40, 19, 86, 27, 90, 65, 70, 80, 90, 100],
+            fill: false,
+            borderColor: documentStyle.getPropertyValue('--p-gray-500'),
             tension: 0.4,
           },
         ],
@@ -160,14 +167,27 @@ export class RelatoriosComponent implements OnInit {
               color: textColor,
             },
           },
+          tooltip: {
+            callbacks: {
+              label: function (context: { label: string; raw: number }) {
+                const value = context.raw || 0;
+
+                const valorFormatado = new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(value);
+
+                return `${valorFormatado}`;
+              },
+            },
+          },
         },
       };
 
       this.basicData = {
-        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+        labels: ['2024', '2025'],
         datasets: [
           {
-            label: 'Sales',
             data: [540, 325, 702, 620],
             backgroundColor: [
               'rgba(249, 115, 22, 0.2)',
@@ -189,8 +209,16 @@ export class RelatoriosComponent implements OnInit {
       this.basicOptions = {
         plugins: {
           legend: {
+            display: false,
             labels: {
               color: textColor,
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context: { raw: any }) {
+                return `R$ ${context.raw}`;
+              },
             },
           },
         },
