@@ -199,6 +199,12 @@ $cor-fixo-bg: #fff7ed;
 .type-option {
   flex: 1;
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.type-option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .type-option input[type="radio"] {
@@ -288,6 +294,12 @@ $cor-fixo-bg: #fff7ed;
 
 .category-option {
   position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .category-option input[type="radio"] {
