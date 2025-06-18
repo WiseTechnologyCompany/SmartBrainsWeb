@@ -4,7 +4,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LogoutService } from '../../utils/logout/logout-service';
-import { ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
 
 @Component({
   standalone: true,
@@ -40,6 +46,8 @@ export class RelatoriosComponent implements OnInit {
   }
 
   data: any;
+  basicData: any;
+  basicOptions: any;
   options: any;
   platformId = inject(PLATFORM_ID);
 
@@ -50,64 +58,116 @@ export class RelatoriosComponent implements OnInit {
   initChart() {
     if (isPlatformBrowser(this.platformId)) {
       const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
+      const textColor = documentStyle.getPropertyValue('--p-text-color');
+      const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
+      const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
 
       this.data = {
         labels: [
-          'Salário',
-          'Alimentação',
-          'Transporte',
-          'Moradia',
-          'Lazer',
-          'Saúde',
-          'Educação',
-          'Compras',
-          'Contas',
-          'Outros',
+          'Janeiro',
+          'Fevereiro',
+          'Março',
+          'Abril',
+          'Maio',
+          'Junho',
+          'Julho',
+          'Agosto',
+          'Setembro',
+          'Outubro',
+          'Novembro',
+          'Dezembro',
         ],
+
         datasets: [
           {
-            data: [540, 325, 702, 100, 600, 400, 300, 200, 150, 100],
-            backgroundColor: [
-              '#4CAF50',
-              '#FF9800',
-              '#2196F3',
-              '#9C27B0',
-              '#E91E63',
-              '#009688',
-              '#3F51B5',
-              '#F44336',
-              '#607D8B',
-              '#9E9E9E'
-            ],
-
-            hoverBackgroundColor: [
-              '#66BB6A',
-              '#FFB74D',
-              '#64B5F6',
-              '#BA68C8',
-              '#F06292',
-              '#4DB6AC',
-              '#7986CB',
-              '#EF5350',
-              '#90A4AE',
-              '#BDBDBD'
-            ],
+            label: '2025',
+            data: [65, 59, 80, 81, 56, 55, 40, 72, 68, 150, 77, 60],
+            fill: false,
+            borderColor: documentStyle.getPropertyValue('--p-cyan-500'),
+            tension: 0.4,
           },
         ],
       };
 
       this.options = {
+        maintainAspectRatio: false,
+        aspectRatio: 0.6,
         plugins: {
           legend: {
             labels: {
-              usePointStyle: true,
               color: textColor,
             },
           },
         },
+        scales: {
+          x: {
+            ticks: {
+              color: textColorSecondary,
+            },
+            grid: {
+              color: surfaceBorder,
+              drawBorder: false,
+            },
+          },
+          y: {
+            ticks: {
+              color: textColorSecondary,
+            },
+            grid: {
+              color: surfaceBorder,
+              drawBorder: false,
+            },
+          },
+        },
       };
-      
+
+      this.basicData = {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [
+                    {
+                        label: 'Sales',
+                        data: [540, 325, 702, 620],
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.2)',
+                            'rgba(6, 182, 212, 0.2)',
+                            'rgb(107, 114, 128, 0.2)',
+                            'rgba(139, 92, 246, 0.2)',
+                        ],
+                        borderColor: ['rgb(249, 115, 22)', 'rgb(6, 182, 212)', 'rgb(107, 114, 128)', 'rgb(139, 92, 246)'],
+                        borderWidth: 1,
+                    },
+                ],
+            };
+
+            this.basicOptions = {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: textColor,
+                        },
+                    },
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: textColorSecondary,
+                        },
+                        grid: {
+                            color: surfaceBorder,
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: textColorSecondary,
+                        },
+                        grid: {
+                            color: surfaceBorder,
+                        },
+                    },
+                },
+            };
+
       this.cd.markForCheck();
     }
   }
