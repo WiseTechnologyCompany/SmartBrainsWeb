@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LogoutService } from '../../utils/logout/logout-service';
+import { RelatoriosService, TotalCategoriaDTO, TotalEntradaPorMesDTO, TotalSaidaPorMesDTO } from './relatorios.service';
 import {
   ChangeDetectorRef,
   Component,
@@ -11,7 +12,6 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { RelatoriosService } from './relatorios.service';
 
 @Component({
   standalone: true,
@@ -27,6 +27,12 @@ import { RelatoriosService } from './relatorios.service';
   ],
 })
 export class RelatoriosComponent implements OnInit {
+  totalSaida!: number;
+  totalEntrada!: number;
+  totalEntradaPorMes: TotalEntradaPorMesDTO[] = [];
+  totalSaidaPorMes: TotalSaidaPorMesDTO[] = [];
+  totalCategoria: TotalCategoriaDTO[] = [];
+
   constructor(
     private cd: ChangeDetectorRef,
     private logoutService: LogoutService,
@@ -55,6 +61,22 @@ export class RelatoriosComponent implements OnInit {
   platformId = inject(PLATFORM_ID);
 
   ngOnInit() {
+    this.carregarDados();
+  }
+
+  async carregarDados() {
+    const [entradaSaidaPorAno, totalEntradaPorMes, totalSaidaPorMes, totalCategoria] = await Promise.all([
+      this.relatoriosService.getTotalEntradaSaidaPorAno(),
+      this.relatoriosService.getTotalEntradaPorMes(),
+      this.relatoriosService.getTotalSaidaPorMes(),
+      this.relatoriosService.getTotalCategoria(),
+    ]);
+
+    this.totalEntrada = entradaSaidaPorAno.totalEntrada;
+    this.totalSaida = entradaSaidaPorAno.totalSaida;
+    this.totalEntradaPorMes = totalEntradaPorMes;
+    this.totalSaidaPorMes = totalSaidaPorMes;
+    this.totalCategoria = totalCategoria;
     this.initChart();
   }
 
@@ -65,33 +87,24 @@ export class RelatoriosComponent implements OnInit {
       const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
       const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
 
+      const entradasPorMes = this.totalEntradaPorMes.map((d) => d.totalEntrada);
+      const saidasPorMes = this.totalSaidaPorMes.map((d) => d.totalSaida);
+      const totalCategorias = this.totalCategoria.map((d) => d.total);
+
       this.data = {
-        labels: [
-          'Janeiro',
-          'Fevereiro',
-          'Março',
-          'Abril',
-          'Maio',
-          'Junho',
-          'Julho',
-          'Agosto',
-          'Setembro',
-          'Outubro',
-          'Novembro',
-          'Dezembro',
-        ],
+        labels: this.totalEntradaPorMes.map((d) => d.mes),
 
         datasets: [
           {
-            label: 'Entradas - 2025',
-            data: [50, 65, 40, 35, 75, 27, 80, 65, 70, 80, 90, 75],
+            label: 'Entradas',
+            data: entradasPorMes,
             fill: false,
             borderColor: documentStyle.getPropertyValue('--p-gray-500'),
             tension: 0.4,
           },
           {
-            label: 'Saídas - 2025',
-            data: [28, 48, 40, 19, 86, 27, 90, 39, 80, 40, 60, 50],
+            label: 'Saídas',
+            data: saidasPorMes,
             fill: false,
             borderColor: documentStyle.getPropertyValue('--p-blue-500'),
             tension: 0.4,
@@ -146,7 +159,7 @@ export class RelatoriosComponent implements OnInit {
         ],
         datasets: [
           {
-            data: [4500, 800, 300, 1200, 400, 250, 500, 700, 600, 150],
+            data: totalCategorias,
             backgroundColor: [
               '#4CAF50',
               '#FFC107',
@@ -157,7 +170,7 @@ export class RelatoriosComponent implements OnInit {
               '#2196F3',
               '#EC407A',
               '#9E9E9E',
-              '#6D4C41',
+              '#607D8B',
             ],
           },
         ],
@@ -192,16 +205,16 @@ export class RelatoriosComponent implements OnInit {
         labels: ['2025'],
         datasets: [
           {
-            data: [6040],
-            backgroundColor: ['rgba(228, 5, 5, 0.2)'],
-            borderColor: ['rgb(231, 4, 4)'],
-            borderWidth: 1,
+            data: [this.totalSaida],
+            backgroundColor: ['rgba(220, 53, 69, 0.2)'],
+            borderColor: ['#dc3545'],
+            borderWidth: 2,
           },
           {
-            data: [8548],
-            backgroundColor: ['rgba(3, 194, 29, 0.2)'],
-            borderColor: ['rgb(5, 124, 5)'],
-            borderWidth: 1,
+            data: [this.totalEntrada],
+            backgroundColor: ['rgba(40, 167, 69, 0.2)'],
+            borderColor: ['#28a745'],
+            borderWidth: 2,
           },
         ],
       };
