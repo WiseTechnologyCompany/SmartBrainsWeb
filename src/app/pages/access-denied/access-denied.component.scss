@@ -1,42 +1,9 @@
-$dark-blue: #0d47a1;
-$dark-gray: #444444;
-$light-gray: #f5f7fa;
 $primary-blue: #1a73e8;
+$cor-primaria: #76a7b9;
 $secondary-blue: #4285f4;
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
-  }
-  50% {
-    transform: scale(1.05);
-    text-shadow: 5px 5px 20px rgba(26, 115, 232, 0.5);
-  }
-  100% {
-    transform: scale(1);
-    text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0);
-  }
-  50% {
-    transform: translateY(-15px) rotate(5deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+$dark-blue: #0d47a1;
+$light-gray: #f5f7fa;
+$dark-gray: #444444;
 
 * {
   margin: 0;
@@ -70,6 +37,13 @@ $secondary-blue: #4285f4;
   margin-bottom: 40px;
 }
 
+@media (min-width: 768px) {
+  .error-container {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
 .error-code {
   font-size: 1200%;
   font-weight: 700;
@@ -78,6 +52,30 @@ $secondary-blue: #4285f4;
   text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
   position: relative;
   animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 5px 5px 20px rgba(26, 115, 232, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 5px 5px 10px rgba(26, 115, 232, 0.3);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .error-message {
@@ -155,6 +153,16 @@ $secondary-blue: #4285f4;
 
 .finance-icon:nth-child(3n) {
   animation-delay: 4s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
 }
 
 .icon-chart {
